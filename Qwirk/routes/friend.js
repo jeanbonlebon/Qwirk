@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var frie = require('../controllers/friends.js');
 
 router.get('/findFriend', function(req, res){
 

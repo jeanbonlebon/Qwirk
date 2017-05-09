@@ -3,22 +3,44 @@ config = require('../config.js'); //config file contains all tokens and other pr
 
 var mongodbUrl = 'mongodb://' + config.mongodbHost + ':27017/users';
 var MongoClient = require('mongodb').MongoClient
+var deferred = Q.defer();
+
+//var async = require("async");
 
 exports.getFriendList = function(req, res){
 
   MongoClient.connect(mongodbUrl, function (err, db) {
     var collection = db.collection('localUsers');
+    var collection_frie = db.collection('friendRelation');
 
+    var userResult2 = [];
     var userResult = [];
-    collection.find({},{_id:0, password:0, avatar:0 }).toArray(function(err, cursor){
+    var mySelf = req.user.username;
 
-      cursor.forEach(function(results){
-          userResult.push(results.username)
-      });
-      db.close();
-      res.json(userResult);
-    });
-  });
+    collection_frie.find({friend1 : mySelf})
+        .toArray(function(err, results){
+            if (err) {
+              res.json("Error");
+            }
+            results.forEach(function(results){
+              userResult.push(results.friend2);
+            });
+            userResult.push(mySelf);
+            collection.find({ username : {$nin : userResult} })
+                .toArray(function(err,results2){
+                    if (err) {
+                      res.json("Error");
+                    }
+                    console.log(results2);
+                    results2.forEach(function(results2){
+                        userResult2.push(results2.username);
+                    });
+
+                db.close();
+                res.json(userResult2);
+            })
+        })
+  })
 }
 
 exports.AddAFriend = function(req, res){
