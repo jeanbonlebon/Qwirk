@@ -5,7 +5,7 @@ console.log(router);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('home', { title: 'Express' });
+  res.render('home', {user: req.user});
 });
 
 module.exports = router;

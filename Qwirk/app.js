@@ -45,8 +45,8 @@ app.use(session({secret: 'supernova', saveUninitialized: true, resave: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(stylus.middleware(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(stylus.middleware(path.join(__dirname, '/')));
+app.use(express.static(path.join(__dirname, '/')));
 
 // Session-persisted message middleware
 app.use(function(req, res, next){

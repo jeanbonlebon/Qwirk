@@ -12,7 +12,7 @@ $(function() {
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     // url points to a json file that contains an array of country names, see
     // https://github.com/twitter/typeahead.js/blob/gh-pages/data/countries.json
-    prefetch: '/findFriend',
+    prefetch: '/friend/findFriend',
     //prefetch: 'ressources/data.json'
   });
 
@@ -31,7 +31,7 @@ $(function() {
           return '<div><strong>' + data + '</strong>' +
           '<a href="javascript:;;" id="' + data + '" class="add_friend" onClick="dontClose()"><i class="material-icons">add</i></a>'+
 
-          '<div class="preloader"><img src="ressources/img/loading.gif"></div>'+
+          '<div class="preloader"><img src="public/images/loading.gif"></div>'+
           '<div class="check"><i class="material-icons">done</i></div>'+
 
           '</div>';
@@ -66,7 +66,7 @@ function dontClose(e) {
       targetElement.parent('a').hide();
       targetElement.parent('a').next('.preloader').show();
 
-      $.post('/addFriend', parameters, function(data) {
+      $.post('/friend/addFriend', parameters, function(data) {
         }).done(function (data) {
             targetElement.parent('a').next('.preloader').hide();
             targetElement.parent('a').next('.preloader').next('.check').show();
