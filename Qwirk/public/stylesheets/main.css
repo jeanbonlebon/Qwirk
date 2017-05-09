@@ -1,0 +1,157 @@
+body{
+  	margin:0;
+}
+
+header{
+	background-color:#673AB7;
+}
+
+.bg_home{
+		width: 100vw;
+		height: 100vh;
+		background: url(../img/bg_main.png) no-repeat center center fixed;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+}
+
+form.main_form{
+		position: absolute;
+    width: 50%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+p.alert{
+    margin: 0;
+    padding: 15px 0;
+    position: absolute;
+    top: 0;
+    text-align: center;
+    width: 100%;
+    background-color: rebeccapurple;
+    color: white;
+    z-index: 9;
+}
+p.alert-warning{
+      background-color: rebeccapurple;
+}
+p.alert-success{
+    background-color: green;
+}
+
+header nav{
+    background-color: rebeccapurple;
+}
+header nav .nav-wrapper{
+    margin: 0 20px;
+}
+
+header nav li.userMenu{
+    text-align: center;
+}
+header nav li.userMenu a.dropdown-button{
+    height: 65px;
+}
+header nav li.userMenu a img{
+    width: 50%;
+    margin-top: 3px;
+}
+
+header nav li#SearchFriends{
+    width:500px;
+}
+
+header nav li#SearchFriends input.typeahead{
+    margin: 6px 0px 12px 0px;
+}
+
+header nav li#SearchFriends span.twitter-typeahead{
+    width:100%;
+}
+
+header nav li#SearchFriends span.twitter-typeahead .tt-menu{
+    width:100%;
+    padding: 8px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.tt-suggestion{
+    position:relative;
+    color: black;
+    line-height: 50px;
+    padding-left: 25px;
+    margin:0;
+}
+.tt-suggestion:hover{
+    cursor:pointer;
+    background-color: #9575CD;
+    color:#FFF;
+}
+
+.tt-suggestion .add_friend{
+    position: absolute;
+    right: 20px;
+    top:0;
+    height:50px;
+    color: #FFF;
+}
+
+.tt-suggestion .add_friend:hover i{
+    color:#FFF;
+}
+
+.tt-suggestion .add_friend i{
+    color:black;
+    margin-top:-8px;
+}
+
+.empty-message{
+    padding-left:25px;
+    color:#000;
+}
+
+
+body #ContactNav{
+    height: 100vh;
+}
+
+body #ContactNav ul{
+
+}
+
+body #ContactNav ul li{
+    display:block;
+    width:100%;
+}
+
+body #ContactNav ul li a{
+
+}
+
+.preloader{
+    display:none;
+    position: absolute;
+    right: 32px;
+    top: 9px;
+}
+
+.check{
+  display:none;
+  position: absolute;
+  right: 20px;
+  top: -9px;
+}

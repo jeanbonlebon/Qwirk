@@ -1,0 +1,75 @@
+<!-- views/home.handlebars -->
+{{#if user}}
+
+<div class="row">
+    <nav id="ContactNav" class="col s3">
+        <h4>My Friends</h4>
+        <ul>
+            <li><a href="#">Jérôme Dem</a></li>
+            <li><a href="#">Clarisse Starling</a></li>
+            <li><a href="#">Jean-Guy</a></li>
+        </ul>
+        <h4>My Groups</h4>
+        <ul>
+            <li><a href="#"></a></li>
+        </ul>
+        <h4>My Channels</h4>
+        <ul>
+            <li><a href="#"></a></li>
+        </ul>
+    </nav>
+    <section class="col s9">
+
+    </section>
+</div>
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <!--
+      <p>Username: {{user.username}}</p>
+      <p>Avatar: <img src="ressources/img/{{user.avatar}}"/></p>
+
+      <a href="/delete" class="btn btn-primary btn-lg" role="button">
+        <span class="glyphicon glyphicon-user"></span>
+        Delete User!
+      </a>
+      -->
+
+{{else}}
+    <div class="bg_home">
+      <div class="container-fluid">
+
+        <form id="local-sign-in" class="collapse main_form" action="/auth/login" method="post">
+          <div>
+            <p></p>
+            <label>Username:</label>
+            <input type="text" name="username"/>
+          </div>
+          <div>
+            <label>Password:</label>
+            <input type="password" name="password"/>
+          </div>
+        <div class="row">
+        <div class="col s6">
+          <input type="submit" class="btn btn-primary btn-sm" value="Log In"/>
+        </div>
+        <div class="col s6">
+          <a href="/auth/signin" class="btn btn-default btn-md" role="button">Create a account</a>
+        </div>
+        </div>
+        </form>
+      </div><!-- /.container-fluid -->
+    </div>
+<!--
+  <div class="jumbotron">
+    <h1>MongoDB User Authentication</h1>
+    <p>Sign in and view your profile!</p>
+    <p>
+      <a href="/signin" class="btn btn-primary btn-lg" role="button">
+        <span class="glyphicon glyphicon-user"></span>
+        Sign in!
+      </a>
+    </p>
+  </div>
+-->
+{{/if}}
