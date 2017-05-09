@@ -2,30 +2,61 @@
 {{#if user}}
 
 <div class="row">
-    <nav id="ContactNav" class="col s3">
-        <h4>My Friends</h4>
-        <ul>
-            <li><a href="#">Jérôme Dem</a></li>
-            <li><a href="#">Clarisse Starling</a></li>
-            <li><a href="#">Jean-Guy</a></li>
-        </ul>
-        <h4>My Groups</h4>
-        <ul>
-            <li><a href="#"></a></li>
-        </ul>
-        <h4>My Channels</h4>
-        <ul>
-            <li><a href="#"></a></li>
-        </ul>
-    </nav>
-    <section class="col s9">
+  <nav id="ContactNav" class="col s3">
+    <h4>My Friends</h4>
+    <ul>
+      <li><a href="#">Jérôme Dem</a></li>
+      <li><a href="#">Clarisse Starling</a></li>
+      <li><a href="#">Jean-Guy</a></li>
+    </ul>
+    <h4>My Groups</h4>
+    <ul>
+      <li>
+        <a href="#"></a>
+      </li>
+      <li><a class="waves-effect waves-light" href="#modal1">Ajouter un groupe</a></li>
+    </ul>
+    <h4>My Channels</h4>
+    <ul>
+      <li>
+        <a href="#"></a>
+      </li>
+    </ul>
+  </nav>
+  <section class="col s9">
 
-    </section>
+  </section>
+</div>
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <h4>Ajouter un groupe</h4>
+    <hr/>
+    <div class="input-field col s6">
+      <input placeholder="Nomdu groupe" id="group_name" type="text" class="validate">
+      <label for="group_name">Nom du groupe</label>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action group modal-close waves-effect waves-green btn-flat">Ajouter</a>
+    <script>
+      $('.modal-footer > a.group').click(function () {
+        var groupName = $('input#group_name').first().val();
+        $.post('/groups/add', { name: groupName })
+          .done(function( data ) {
+            console.log( data );
+          })
+          .fail(function() {
+            alert( "error" );
+          })
+      })
+    </script>
+  </div>
 </div>
 
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <!--
+<div class="panel panel-default">
+  <div class="panel-body">
+    <!--
       <p>Username: {{user.username}}</p>
       <p>Avatar: <img src="ressources/img/{{user.avatar}}"/></p>
 
@@ -35,7 +66,7 @@
       </a>
       -->
 
-{{else}}
+    {{else}}
     <div class="bg_home">
       <div class="container-fluid">
 
@@ -43,33 +74,22 @@
           <div>
             <p></p>
             <label>Username:</label>
-            <input type="text" name="username"/>
+            <input type="text" name="username" />
           </div>
           <div>
             <label>Password:</label>
-            <input type="password" name="password"/>
+            <input type="password" name="password" />
           </div>
-        <div class="row">
-        <div class="col s6">
-          <input type="submit" class="btn btn-primary btn-sm" value="Log In"/>
-        </div>
-        <div class="col s6">
-          <a href="/auth/signin" class="btn btn-default btn-md" role="button">Create a account</a>
-        </div>
-        </div>
+          <div class="row">
+            <div class="col s6">
+              <input type="submit" class="btn btn-primary btn-sm" value="Log In" />
+            </div>
+            <div class="col s6">
+              <a href="/auth/signin" class="btn btn-default btn-md" role="button">Create a account</a>
+            </div>
+          </div>
         </form>
-      </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.container-fluid -->
     </div>
-<!--
-  <div class="jumbotron">
-    <h1>MongoDB User Authentication</h1>
-    <p>Sign in and view your profile!</p>
-    <p>
-      <a href="/signin" class="btn btn-primary btn-lg" role="button">
-        <span class="glyphicon glyphicon-user"></span>
-        Sign in!
-      </a>
-    </p>
-  </div>
--->
-{{/if}}
+    {{/if}}

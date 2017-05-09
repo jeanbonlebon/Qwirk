@@ -14,13 +14,15 @@ var express = require('express'),
     stylus = require('stylus');
 
 var config = require('./config.js'),
-    frie = require('./controllers/friends.js');
+    frie = require('./controllers/friends.js'),
+    groupsController = require('./controllers/groupsController.js');
 
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-var auth = require('./routes/auth');
+var index  = require('./routes/index');
+var users  = require('./routes/users');
+var auth   = require('./routes/auth');
 var friend = require('./routes/friend');
+var groups = require('./routes/groups');
 
 var app = express();
 
@@ -69,6 +71,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/auth', auth);
 app.use('/friend', friend);
+app.use('/groups', groups);
 
 module.exports = app;
 
