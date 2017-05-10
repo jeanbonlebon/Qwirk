@@ -7,22 +7,23 @@ var express = require('express'),
     session = require('express-session'),
     passport = require('passport'),
     LocalStrategy = require('passport-local'),
-
     path = require('path'),
     favicon = require('serve-favicon'),
-    logger = require('morgan');
+    logger = require('morgan'),
     stylus = require('stylus');
 
 var config = require('./config.js'),
     frie = require('./controllers/friends.js'),
-    groupsController = require('./controllers/groupsController.js');
+    groupsController   = require('./controllers/groupsController.js'),
+    channelsController = require('./controllers/channelsController.js');
 
 
-var index  = require('./routes/index');
-var users  = require('./routes/users');
-var auth   = require('./routes/auth');
-var friend = require('./routes/friend');
-var groups = require('./routes/groups');
+var index    = require('./routes/index');
+var users    = require('./routes/users');
+var auth     = require('./routes/auth');
+var friend   = require('./routes/friend');
+var groups   = require('./routes/groups');
+var channels = require('./routes/channels');
 
 var app = express();
 
@@ -40,38 +41,38 @@ app.set('view engine', 'handlebars');
 // Configure Express
 app.use(logger('combined'));
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(session({secret: 'supernova', saveUninitialized: true, resave: true}));
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use(stylus.middleware(path.join(__dirname, '/')));
 app.use(express.static(path.join(__dirname, '/')));
 
 // Session-persisted message middleware
-app.use(function(req, res, next){
-  var err = req.session.error,
-      msg = req.session.notice,
-      success = req.session.success;
+app.use(function (req, res, next) {
+    var err = req.session.error,
+        msg = req.session.notice,
+        success = req.session.success;
 
-  delete req.session.error;
-  delete req.session.success;
-  delete req.session.notice;
+    delete req.session.error;
+    delete req.session.success;
+    delete req.session.notice;
 
-  if (err) res.locals.error = err;
-  if (msg) res.locals.notice = msg;
-  if (success) res.locals.success = success;
+    if (err) res.locals.error = err;
+    if (msg) res.locals.notice = msg;
+    if (success) res.locals.success = success;
 
-  next();
+    next();
 });
 
-app.use('/', index);
-app.use('/users', users);
-app.use('/auth', auth);
-app.use('/friend', friend);
-app.use('/groups', groups);
+app.use('/'        , index);
+app.use('/users'   , users);
+app.use('/auth'    , auth);
+app.use('/friend'  , friend);
+app.use('/groups'  , groups);
+app.use('/channels', channels);
 
 module.exports = app;
 

@@ -11,48 +11,61 @@
     </ul>
     <h4>My Groups</h4>
     <ul>
-      <li>
-        <a href="#"></a>
-      </li>
-      <li><a class="waves-effect waves-light" href="#modal1">Ajouter un groupe</a></li>
+      <li><a href="#"></a></li>
+      <li><a class="group waves-effect waves-light" href="#group-modal">Ajouter un groupe</a></li>
     </ul>
     <h4>My Channels</h4>
     <ul>
-      <li>
-        <a href="#"></a>
-      </li>
+      <li><a href="#"></a></li>
+      <li><a class="channel waves-effect waves-light" href="#channel-modal">Ajouter un channel</a></li>
     </ul>
   </nav>
   <section class="col s9">
 
   </section>
 </div>
-<!-- Modal Structure -->
-<div id="modal1" class="modal">
+
+<!-- Modal Structures -->
+<div id="group-modal" class="modal">
   <div class="modal-content">
-    <h4>Ajouter un groupe</h4>
-    <hr/>
+    <h4>Ajouter un groupe</h4><hr/>
     <div class="input-field col s6">
-      <input placeholder="Nomdu groupe" id="group_name" type="text" class="validate">
+      <input placeholder="Nom du groupe" id="group_name" type="text" class="validate">
       <label for="group_name">Nom du groupe</label>
     </div>
   </div>
   <div class="modal-footer">
-    <a href="#!" class="modal-action group modal-close waves-effect waves-green btn-flat">Ajouter</a>
-    <script>
-      $('.modal-footer > a.group').click(function () {
-        var groupName = $('input#group_name').first().val();
-        $.post('/groups/add', { name: groupName })
-          .done(function( data ) {
-            console.log( data );
-          })
-          .fail(function() {
-            alert( "error" );
-          })
-      })
-    </script>
+    <a class="modal-action group modal-close waves-effect waves-green btn-flat">Ajouter</a>
   </div>
 </div>
+
+<div id="channel-modal" class="modal">
+  <div class="modal-content">
+    <h4>Ajouter un channel</h4><hr/>
+    <div class="input-field col s6">
+      <input placeholder="Nom du channel" id="channel_name" type="text" class="validate">
+      <label for="channel_name">Nom du channel</label>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action channel modal-close waves-effect waves-green btn-flat">Ajouter</a>
+  </div>
+</div>
+
+<script>
+  $('.modal-footer > a.group').click(function () {
+    var groupName = $('input#group_name').first().val();
+    $.post('/groups/add', { name: groupName })
+      .done(function( data ) {console.log( data )})
+      .fail(function() {alert( "error" )})
+  })
+  $('.modal-footer > a.channel').click(function () {
+    var channelName = $('input#channel_name').first().val();
+    $.post('/channels/add', { name: channelName })
+      .done(function( data ) {console.log( data )})
+      .fail(function() {alert( "error" )})
+  })
+</script>
 
 <div class="panel panel-default">
   <div class="panel-body">
