@@ -4,7 +4,8 @@ $(function() {
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       //prefetch: '/friend/findFriend',
       remote: {
-          url : '/friend/findFriend',
+          wildcard: '%QUERY',
+          url : '/friend/findFriend?query=%QUERY',
       },
       cache : true
     });

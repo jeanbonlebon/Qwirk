@@ -124,24 +124,6 @@ header nav li#SearchFriends span.twitter-typeahead .tt-menu{
     color:#000;
 }
 
-
-body #ContactNav{
-    height: 100vh;
-}
-
-body #ContactNav ul{
-
-}
-
-body #ContactNav ul li{
-    display:block;
-    width:100%;
-}
-
-body #ContactNav ul li a{
-
-}
-
 .preloader{
     display:none;
     position: absolute;
@@ -154,4 +136,71 @@ body #ContactNav ul li a{
   position: absolute;
   right: 20px;
   top: -9px;
+}
+
+
+/**** LEFT NAV ****/
+
+body #ContactNav{
+    height: 100vh;
+    background-color: #e1bee7;
+}
+
+body #ContactNav section{
+    border-top: solid 2px #FFF;
+    padding: 8px 0px;
+    color: #FFF;
+    margin-bottom:0;
+}
+body #ContactNav section:first-child{
+    border:none;
+}
+
+body #ContactNav section .add{
+    position: relative;
+}
+body #ContactNav section .add a{
+    background-color: #FFF;
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+body #ContactNav section .add a i{
+    font-size:31px;
+    color: #e1bee7;
+    position: absolute;
+    left: 5px;
+    height: 50px;
+    bottom: -2px;
+}
+
+body #ContactNav section h5{
+    color: #000;
+}
+
+body #ContactNav ul{
+    margin-left: 15px;
+    list-style-type: none;
+    padding-left: 10px;
+    margin-bottom:0;
+}
+
+body #ContactNav ul li{
+    display:block;
+    width:100%;
+    line-height: 50px;
+    border-bottom: solid 2px #FFF;
+}
+body #ContactNav ul li:first-child{
+    border-top: solid 2px #FFF;
+}
+body #ContactNav ul li:last-child{
+    border-bottom:none;
+}
+body #ContactNav ul li a{
+    color: #000;
 }

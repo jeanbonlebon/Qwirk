@@ -1,11 +1,10 @@
 Q = require('q'),
 config = require('../config.js'); //config file contains all tokens and other private info
 
-var mongodbUrl = 'mongodb://' + config.mongodbHost + ':27017/users';
+var mongodbUrl = 'mongodb://' + config.mongodbHost + ':27017/qwirk';
 var MongoClient = require('mongodb').MongoClient
 var deferred = Q.defer();
 
-//var async = require("async");
 
 exports.getFriendList = function(req, res){
 

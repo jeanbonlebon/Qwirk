@@ -3,25 +3,72 @@
 
 <div class="row">
     <nav id="ContactNav" class="col s3">
-        <h4>My Friends</h4>
-        <ul>
-            <li><a href="#">Jérôme Dem</a></li>
-            <li><a href="#">Clarisse Starling</a></li>
-            <li><a href="#">Jean-Guy</a></li>
+        <section class="row">
+            <h5 class="col s9">Recent friends</h5>
+        </section>
+        <ul class="row">
+            {{#each friends}}
+                <li><a href="#">{{friend2}}</a></li>
+            {{/each}}
         </ul>
-        <h4>My Groups</h4>
-        <ul>
-            <li><a href="#"></a></li>
+
+        <section class="row">
+            <h5 class="col s9">Recent groups</h5>
+            <div class="col s3 add">
+                <a class="group waves-effect waves-light" href="#group-modal"><i class="material-icons">add</i></a>
+            </div>
+        </section>
+        <ul class="row">
+            {{#each groups}}
+                <li><a href="#">{{group_name}}</a></li>
+            {{/each}}
         </ul>
-        <h4>My Channels</h4>
-        <ul>
-            <li><a href="#"></a></li>
+
+        <section class="row">
+            <h5 class="col s9">Recent channels</h5>
+            <div class="col s3 add">
+                <a class="channel waves-effect waves-light" href="#channel-modal"><i class="material-icons">add</i></a>
+            </div>
+        </section>
+        <ul class="row">
+            {{#each channels}}
+                <li><a href="#">{{channel_name}}</a></li>
+            {{/each}}
         </ul>
+
     </nav>
     <section class="col s9">
-
+      
     </section>
 </div>
+
+<!-- Modal Structures -->
+<div id="group-modal" class="modal">
+  <div class="modal-content">
+    <h4>Ajouter un groupe</h4><hr/>
+    <div class="input-field col s6">
+      <input placeholder="Nom du groupe" id="group_name" type="text" class="validate">
+      <label for="group_name">Nom du groupe</label>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action group modal-close waves-effect waves-green btn-flat">Ajouter</a>
+  </div>
+</div>
+
+<div id="channel-modal" class="modal">
+  <div class="modal-content">
+    <h4>Ajouter un channel</h4><hr/>
+    <div class="input-field col s6">
+      <input placeholder="Nom du channel" id="channel_name" type="text" class="validate">
+      <label for="channel_name">Nom du channel</label>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action channel modal-close waves-effect waves-green btn-flat">Ajouter</a>
+  </div>
+</div>
+
 
   <div class="panel panel-default">
     <div class="panel-body">

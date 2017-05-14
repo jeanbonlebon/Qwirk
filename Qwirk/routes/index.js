@@ -1,11 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-console.log(router);
+var index = require('../controllers/index');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('home', {user: req.user});
-});
+router.get('/', index.getMyFriends, index.GetMyGroups, index.GetMyChannels);
 
 module.exports = router;
