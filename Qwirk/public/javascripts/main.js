@@ -8,6 +8,7 @@ $(function() {
     }
   );
 
+<<<<<<< HEAD
   $('.modal').modal();
 
   $('.modal-footer > a.group').click(function () {
@@ -22,5 +23,10 @@ $(function() {
       .done(function( data ) {console.log( data )})
       .fail(function() {alert( "error" )})
   })
+=======
+  $(document).ready(function(){
+    $('.modal').modal();
+  });
+>>>>>>> a3e3c4f1502088d5d4680d36f213fb4c3797c5ad
 
 });

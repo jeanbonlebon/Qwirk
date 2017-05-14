@@ -2,6 +2,7 @@
 {{#if user}}
 
 <div class="row">
+<<<<<<< HEAD
     <nav id="ContactNav" class="col s3">
         <section class="row">
             <h5 class="col s9">Recent friends</h5>
@@ -40,6 +41,29 @@
     <section class="col s9">
       
     </section>
+=======
+  <nav id="ContactNav" class="col s3">
+    <h4>My Friends</h4>
+    <ul>
+      <li><a href="#">Jérôme Dem</a></li>
+      <li><a href="#">Clarisse Starling</a></li>
+      <li><a href="#">Jean-Guy</a></li>
+    </ul>
+    <h4>My Groups</h4>
+    <ul>
+      <li><a href="#"></a></li>
+      <li><a class="group waves-effect waves-light" href="#group-modal">Ajouter un groupe</a></li>
+    </ul>
+    <h4>My Channels</h4>
+    <ul>
+      <li><a href="#"></a></li>
+      <li><a class="channel waves-effect waves-light" href="#channel-modal">Ajouter un channel</a></li>
+    </ul>
+  </nav>
+  <section class="col s9">
+
+  </section>
+>>>>>>> a3e3c4f1502088d5d4680d36f213fb4c3797c5ad
 </div>
 
 <!-- Modal Structures -->
@@ -69,10 +93,31 @@
   </div>
 </div>
 
+<<<<<<< HEAD
 
   <div class="panel panel-default">
     <div class="panel-body">
       <!--
+=======
+<script>
+  $('.modal-footer > a.group').click(function () {
+    var groupName = $('input#group_name').first().val();
+    $.post('/groups/add', { name: groupName })
+      .done(function( data ) {console.log( data )})
+      .fail(function() {alert( "error" )})
+  })
+  $('.modal-footer > a.channel').click(function () {
+    var channelName = $('input#channel_name').first().val();
+    $.post('/channels/add', { name: channelName })
+      .done(function( data ) {console.log( data )})
+      .fail(function() {alert( "error" )})
+  })
+</script>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <!--
+>>>>>>> a3e3c4f1502088d5d4680d36f213fb4c3797c5ad
       <p>Username: {{user.username}}</p>
       <p>Avatar: <img src="ressources/img/{{user.avatar}}"/></p>
 
@@ -82,7 +127,7 @@
       </a>
       -->
 
-{{else}}
+    {{else}}
     <div class="bg_home">
       <div class="container-fluid">
 
@@ -90,33 +135,22 @@
           <div>
             <p></p>
             <label>Username:</label>
-            <input type="text" name="username"/>
+            <input type="text" name="username" />
           </div>
           <div>
             <label>Password:</label>
-            <input type="password" name="password"/>
+            <input type="password" name="password" />
           </div>
-        <div class="row">
-        <div class="col s6">
-          <input type="submit" class="btn btn-primary btn-sm" value="Log In"/>
-        </div>
-        <div class="col s6">
-          <a href="/auth/signin" class="btn btn-default btn-md" role="button">Create a account</a>
-        </div>
-        </div>
+          <div class="row">
+            <div class="col s6">
+              <input type="submit" class="btn btn-primary btn-sm" value="Log In" />
+            </div>
+            <div class="col s6">
+              <a href="/auth/signin" class="btn btn-default btn-md" role="button">Create a account</a>
+            </div>
+          </div>
         </form>
-      </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.container-fluid -->
     </div>
-<!--
-  <div class="jumbotron">
-    <h1>MongoDB User Authentication</h1>
-    <p>Sign in and view your profile!</p>
-    <p>
-      <a href="/signin" class="btn btn-primary btn-lg" role="button">
-        <span class="glyphicon glyphicon-user"></span>
-        Sign in!
-      </a>
-    </p>
-  </div>
--->
-{{/if}}
+    {{/if}}
