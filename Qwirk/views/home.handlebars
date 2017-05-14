@@ -2,7 +2,7 @@
 {{#if user}}
 
 <div class="row">
-<<<<<<< HEAD
+
     <nav id="ContactNav" class="col s3">
         <section class="row">
             <h5 class="col s9">Recent friends</h5>
@@ -39,31 +39,8 @@
 
     </nav>
     <section class="col s9">
-      
-    </section>
-=======
-  <nav id="ContactNav" class="col s3">
-    <h4>My Friends</h4>
-    <ul>
-      <li><a href="#">Jérôme Dem</a></li>
-      <li><a href="#">Clarisse Starling</a></li>
-      <li><a href="#">Jean-Guy</a></li>
-    </ul>
-    <h4>My Groups</h4>
-    <ul>
-      <li><a href="#"></a></li>
-      <li><a class="group waves-effect waves-light" href="#group-modal">Ajouter un groupe</a></li>
-    </ul>
-    <h4>My Channels</h4>
-    <ul>
-      <li><a href="#"></a></li>
-      <li><a class="channel waves-effect waves-light" href="#channel-modal">Ajouter un channel</a></li>
-    </ul>
-  </nav>
-  <section class="col s9">
 
-  </section>
->>>>>>> a3e3c4f1502088d5d4680d36f213fb4c3797c5ad
+    </section>
 </div>
 
 <!-- Modal Structures -->
@@ -98,26 +75,6 @@
   <div class="panel panel-default">
     <div class="panel-body">
       <!--
-=======
-<script>
-  $('.modal-footer > a.group').click(function () {
-    var groupName = $('input#group_name').first().val();
-    $.post('/groups/add', { name: groupName })
-      .done(function( data ) {console.log( data )})
-      .fail(function() {alert( "error" )})
-  })
-  $('.modal-footer > a.channel').click(function () {
-    var channelName = $('input#channel_name').first().val();
-    $.post('/channels/add', { name: channelName })
-      .done(function( data ) {console.log( data )})
-      .fail(function() {alert( "error" )})
-  })
-</script>
-
-<div class="panel panel-default">
-  <div class="panel-body">
-    <!--
->>>>>>> a3e3c4f1502088d5d4680d36f213fb4c3797c5ad
       <p>Username: {{user.username}}</p>
       <p>Avatar: <img src="ressources/img/{{user.avatar}}"/></p>
 
