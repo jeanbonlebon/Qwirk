@@ -1,15 +1,15 @@
 <!-- views/home.handlebars -->
 {{#if user}}
 
-<div class="row">
+<div id="main_content" class="row">
 
     <nav id="ContactNav" class="col s3">
         <section class="row">
             <h5 class="col s9">Recent friends</h5>
         </section>
-        <ul class="row">
+        <ul id="friendList" class="row">
             {{#each friends}}
-                <li><a href="#">{{friend2}}</a></li>
+                <li><a href="/users/{{friend2}}">{{friend2}}</a></li>
             {{/each}}
         </ul>
 
@@ -38,7 +38,19 @@
         </ul>
 
     </nav>
-    <section class="col s9">
+    <section id="playground" class="col s9">
+
+      <div id="loader" class="preloader-wrapper big active">
+        <div class="spinner-layer spinner-blue-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
 
     </section>
 </div>
@@ -70,19 +82,6 @@
   </div>
 </div>
 
-<<<<<<< HEAD
-
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <!--
-      <p>Username: {{user.username}}</p>
-      <p>Avatar: <img src="ressources/img/{{user.avatar}}"/></p>
-
-      <a href="/delete" class="btn btn-primary btn-lg" role="button">
-        <span class="glyphicon glyphicon-user"></span>
-        Delete User!
-      </a>
-      -->
 
     {{else}}
     <div class="bg_home">

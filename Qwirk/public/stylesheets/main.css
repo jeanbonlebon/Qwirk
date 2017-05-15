@@ -1,9 +1,19 @@
+html, body{
+    min-height:100%;
+  	height:100%;
+}
+
 body{
   	margin:0;
 }
 
 header{
 	background-color:#673AB7;
+}
+
+#main_content{
+    height:90%;
+    margin-bottom:0;
 }
 
 .bg_home{
@@ -47,6 +57,9 @@ p.alert-success{
 
 header nav{
     background-color: rebeccapurple;
+}
+header nav .brand-logo{
+    font-weight: bold;
 }
 header nav .nav-wrapper{
     margin: 0 20px;
@@ -142,8 +155,9 @@ header nav li#SearchFriends span.twitter-typeahead .tt-menu{
 /**** LEFT NAV ****/
 
 body #ContactNav{
-    height: 100vh;
+    height: 100%;
     background-color: #e1bee7;
+
 }
 
 body #ContactNav section{
@@ -203,4 +217,49 @@ body #ContactNav ul li:last-child{
 }
 body #ContactNav ul li a{
     color: #000;
+}
+
+#playground{
+    height:100%;
+}
+#loader{
+    display:none;
+}
+
+.wrapper{
+    padding: 0 10%;
+    position:relative;
+    height:100%;
+}
+
+.wrapper .console{
+    position:absolute;
+    bottom:0;
+    background-color: #e1bee7;
+    padding: 10px 20px;
+    width: 80%;
+}
+.wrapper .console input{
+    background-color: #FFF;
+    margin-bottom: 0;
+}
+.wrapper .console .send{
+    margin-bottom:0;
+}
+.wrapper .console .send a{
+    display: block;
+    border-radius: 50%;
+    background-color: white;
+    height: 40px;
+    width: 40px;
+}
+.wrapper .console .send a i{
+    color:#e1bee7;
+    margin-left: 7px;
+    margin-top: 8px;
+}
+/************************* FRIEND HANDLEBARS **********************************/
+.friend_infos{
+    width:100%;
+    text-align:center;
 }

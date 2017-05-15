@@ -32,10 +32,14 @@ var app = express();
 // Configure express to use handlebars templates
 var hbs = exphbs.create({
     defaultLayout: 'main', //we will be creating this layout shortly
+    helpers: {
+      toJSON : function(object) {
+        return JSON.stringify(object);
+      }
+    }
 });
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
-
 
 //===============EXPRESS================
 // Configure Express
