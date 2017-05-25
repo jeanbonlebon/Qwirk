@@ -5,21 +5,23 @@ var mongodbUrl = 'mongodb://' + config.mongodbHost + ':27017/qwirk';
 var MongoClient = require('mongodb').MongoClient
 var deferred = Q.defer();
 
+
 exports.getMyFriends = function(req, res, next){
   if(req.user != null){
 
     MongoClient.connect(mongodbUrl, function (err, db) {
-      var collection = db.collection('friendRelation');
+      var collection = db.collection('users_relation');
       var mySelf = req.user.username;
+      var myFriends = [];
 
-      collection.find({$or : [{friend1 : mySelf},{friend2 : mySelf}] })
+      collection.find({friend1 : mySelf})
         .toArray(function(err, results){
             if (err) {
 
             }
-              db.close();
-              req.friend = results;
-              next();
+            db.close();
+            req.friend = results;
+            next();
         })
     });
 
@@ -50,10 +52,28 @@ exports.GetMyGroups = function(req, res, next){
   }
 }
 
-exports.GetMyChannels = function(req, res){
+exports.GetMyChannels = function(req, res, next){
   if(req.user != null){
-      console.log('Mes Channels');
-  }
-  res.render('home', {user: req.user, friends: req.friend, groups: req.groups});
+    MongoClient.connect(mongodbUrl, function (err, db) {
+      var collection = db.collection('users_channels');
+      var mySelf = req.user.username;
 
+      collection.find({user : mySelf})
+        .toArray(function(err, results){
+            if (err) {
+
+            }
+              db.close();
+              req.channels = results;
+              next();
+        })
+    });
+
+  }else{
+    next();
+  }
+}
+
+exports.GetHome = function(req, res){
+    res.render('home', {user: req.user, friends: req.friend, groups: req.groups, channels: req.channels});
 }

@@ -9,12 +9,17 @@ var deferred = Q.defer();
 exports.getFriendList = function (req, res) {
 
   MongoClient.connect(mongodbUrl, function (err, db) {
-    var collection = db.collection('localUsers');
-    var collection_frie = db.collection('friendRelation');
+    var collection = db.collection('users');
+    var collection_frie = db.collection('users_relation');
 
     var userResult2 = [];
     var userResult = [];
     var mySelf = req.user.username;
+
+    var req_String = req.params[0];
+    var req_StringClear = req_String.substring(12);
+
+    console.log(req_StringClear);
 
     collection_frie.find({
         friend1: mySelf
@@ -28,9 +33,14 @@ exports.getFriendList = function (req, res) {
         });
         userResult.push(mySelf);
         collection.find({
-            username: {
-              $nin: userResult
-            }
+          $and: [{
+              username: {
+                $nin: userResult
+              }},{
+              username: {
+                '$regex' : '^'+req_StringClear+'', '$options' : 'i'
+              }}
+            ]
           })
           .toArray(function (err, results2) {
             if (err) {
@@ -55,7 +65,7 @@ exports.AddAFriend = function (req, res) {
   var myFriend = req.body.data;
 
   MongoClient.connect(mongodbUrl, function (err, db) {
-    var collection = db.collection('friendRelation');
+    var collection = db.collection('users_relation');
 
     collection.findOne({
         "friend1": mySelf,
@@ -71,12 +81,20 @@ exports.AddAFriend = function (req, res) {
             "friend2": myFriend,
             "friend1_username": "",
             "friend2_username": "",
+            "blocked": "",
+          }
+          var friendRel2 = {
+            "friend1": myFriend,
+            "friend2": mySelf,
+            "friend1_username": "",
+            "friend2_username": "",
+            "blocked": "",
           }
           collection.insert(friendRel)
-            .then(function () {
-              db.close();
-              deferred.resolve(true);
-            });
+          .then(function () {db.close()});
+          collection.insert(friendRel2)
+          .then(function () {db.close()});
+          deferred.resolve(true);
         }
       })
   });

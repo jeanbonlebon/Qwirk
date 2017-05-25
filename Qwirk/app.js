@@ -27,8 +27,6 @@ var channels = require('./routes/channels');
 
 var app = express();
 
-
-
 // Configure express to use handlebars templates
 var hbs = exphbs.create({
     defaultLayout: 'main', //we will be creating this layout shortly

@@ -21,6 +21,7 @@
     "passport-twitter": "^1.0.2",
     "q": "^1.0.1",
     "serve-favicon": "^2.4.2",
+    "socket.io": "^2.0.1",
     "stylus": "^0.54.5"
   }
 }

@@ -26,7 +26,7 @@
 
       <nav role="navigation">
         <div class="nav-wrapper">
-          <a href="#!" class="brand-logo">Qwirk</a>
+          <a href="/" class="brand-logo">Qwirk</a>
           <ul class="right hide-on-med-and-down">
             <li id="SearchFriends">
                 <input class="typeahead" type="text" placeholder="Search Friends">
@@ -42,7 +42,7 @@
       </nav>
       <!-- Dropdown Structure -->
       <ul id="userMenu" class="dropdown-content">
-        <li><a href="#!">My Profil</a></li>
+        <li><a id="myProfil" href="/users/{{user.username}}" rel="{{user.username}}">My Profil</a></li>
         <li class="divider"></li>
         <li><a href="auth/logout">Log Out</a></li>
       </ul>
@@ -92,8 +92,10 @@
     <script src="public/javascripts/main.js"></script>
 
     <!-- Ajax JQuery File -->
-    <script src="public/javascripts/ajax/main_ajax.js"></script>
-    <script src="public/javascripts/ajax/friend_system.js"></script>
+    <script src="public/javascripts/ajax/ajax_friends.js"></script>
+    <script src="public/javascripts/ajax/ajax_profil.js"></script>
+    <script src="public/javascripts/ajax/ajax_groups.js"></script>
+    <script src="public/javascripts/ajax/main_searchbar.js"></script>
 
 
 </body>

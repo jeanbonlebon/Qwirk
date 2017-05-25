@@ -11,6 +11,7 @@ module.exports = {
     var deferred = Q.defer();
     var channelName = req.body.name;
     var username = req.user.username;
+    var avatar = req.user.avatar;
     this.connectMongo(function (err, db) {
       var channelCollection = db.collection('channels');
       var userschannelCollection = db.collection('users_channels');
@@ -23,7 +24,7 @@ module.exports = {
             console.log("CREATING CHANNEL:", channelName);
             channelCollection.insert({name: channelName,admin: username})
             .then(function () {db.close()});
-            userschannelCollection.insert({channel_name: channelName,user: username})
+            userschannelCollection.insert({channel_name: channelName,user: username,avatar: avatar})
             .then(function () {db.close()});
             deferred.resolve(true);
           }

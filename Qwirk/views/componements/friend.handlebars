@@ -1,20 +1,22 @@
 <div class="wrapper">
-    <section class="friend_infos">
-        {{#each selectedUser}}
-            <img src="public/images/{{avatar}}" class="responsive-img">
-            <p>{{username}}</p>
-        {{/each}}
-    </section>
-    <section class="console">
+    <div class="wrap">
+      <section class="friend_infos">
+          {{#each selectedUser}}
+              <img src="public/images/{{avatar}}" class="responsive-img">
+              <p>{{username}}</p>
+          {{/each}}
+      </section>
+      <section class="console">
 
-        <div class="row send">
-            <div class="col s11">
-                <input type="text">
-            </div>
-            <div class="col s1">
-                <a href="#"><i class="material-icons">replay</i></a>
-            </div>
-        </div>
+          <div class="row send">
+              <div class="col s11">
+                  <input type="text">
+              </div>
+              <div class="col s1">
+                  <a href="#"><i class="material-icons">replay</i></a>
+              </div>
+          </div>
 
-    </section>
+      </section>
+    </div>
 </div>

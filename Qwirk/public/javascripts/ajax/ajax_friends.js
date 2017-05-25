@@ -1,5 +1,6 @@
 $(function() {
 
+
     $("#friendList li a").click(function (e) {
         e.preventDefault();
         var username = $(this).text();
@@ -42,23 +43,4 @@ function friendData(data2){
             $('#playground').html(html);
         }
     });
-
-  /*
-    var templateSource = $("#friend-template").html(),
-        template = Handlebars.compile(templateSource),
-        friend = template(data);
-        console.log(data);
-        console.log(templateSource);
-        console.log(friend);
-*/      /*
-        console.log(data);
-        //$("#result").load("ajax/test.html");
-        var rawTemplate = '{{#each selectedUser}}'+
-                          '<p>{{username}}</p>'+
-                          '{{/each}}';
-        var compiledTemplate = Handlebars.compile(rawTemplate);
-        var html = compiledTemplate(data);
-
-    $('#playground').html(html);
-    */
 }

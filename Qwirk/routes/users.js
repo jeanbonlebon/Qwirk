@@ -17,7 +17,7 @@ router.get('/:username', function(req, res) {
         }else{
             return res.jqXHR({status : 404});
         }
-    })
+    });
 
 });
 

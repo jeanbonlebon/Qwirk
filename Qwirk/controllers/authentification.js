@@ -10,7 +10,7 @@ exports.localReg = function (username, password) {
   var deferred = Q.defer();
 
   MongoClient.connect(mongodbUrl, function (err, db) {
-    var collection = db.collection('localUsers');
+    var collection = db.collection('users');
 
     //check if username is already assigned in our database
     collection.findOne({
@@ -51,7 +51,7 @@ exports.localAuth = function (username, password) {
   var deferred = Q.defer();
 
   MongoClient.connect(mongodbUrl, function (err, db) {
-    var collection = db.collection('localUsers');
+    var collection = db.collection('users');
 
     collection.findOne({
         'username': username

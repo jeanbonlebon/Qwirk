@@ -19,9 +19,9 @@
                 <a class="group waves-effect waves-light" href="#group-modal"><i class="material-icons">add</i></a>
             </div>
         </section>
-        <ul class="row">
+        <ul id="groupList" class="row">
             {{#each groups}}
-                <li><a href="#">{{group_name}}</a></li>
+                <li><a href="/groups/{{group_name}}">{{group_name}}</a></li>
             {{/each}}
         </ul>
 
@@ -41,16 +41,37 @@
     <section id="playground" class="col s9">
 
       <div id="loader" class="preloader-wrapper big active">
-        <div class="spinner-layer spinner-blue-only">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div><div class="gap-patch">
-            <div class="circle"></div>
-          </div><div class="circle-clipper right">
-            <div class="circle"></div>
+          <div class="spinner-layer spinner-blue-only">
+              <div class="circle-clipper left">
+                  <div class="circle"></div>
+                  </div><div class="gap-patch">
+              <div class="circle"></div>
+              </div><div class="circle-clipper right">
+              <div class="circle"></div>
+              </div>
           </div>
-        </div>
       </div>
+
+      <ul id="messages"></ul>
+      <form action="">
+        <input id="m" autocomplete="off" /><button>Send</button>
+      </form>
+      <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+      <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+      <script>
+        $(function () {
+          var socket = io();
+          $('form').submit(function(){
+            socket.emit('chat message', $('#m').val());
+            $('#m').val('');
+            return false;
+          });
+          socket.on('chat message', function(msg){
+            $('#messages').append($('<li>').text(msg));
+            window.scrollTo(0, document.body.scrollHeight);
+          });
+        });
+      </script>
 
     </section>
 </div>
@@ -58,27 +79,25 @@
 <!-- Modal Structures -->
 <div id="group-modal" class="modal">
   <div class="modal-content">
-    <h4>Ajouter un groupe</h4><hr/>
+    <h4>Create a group</h4><hr/>
     <div class="input-field col s6">
-      <input placeholder="Nom du groupe" id="group_name" type="text" class="validate">
-      <label for="group_name">Nom du groupe</label>
+      <input placeholder="Group Name" id="group_name" type="text" class="validate">
     </div>
   </div>
   <div class="modal-footer">
-    <a class="modal-action group modal-close waves-effect waves-green btn-flat">Ajouter</a>
+    <a class="modal-action group modal-close waves-effect waves-green btn-flat">Add</a>
   </div>
 </div>
 
 <div id="channel-modal" class="modal">
   <div class="modal-content">
-    <h4>Ajouter un channel</h4><hr/>
+    <h4>Create a Channel</h4><hr/>
     <div class="input-field col s6">
-      <input placeholder="Nom du channel" id="channel_name" type="text" class="validate">
-      <label for="channel_name">Nom du channel</label>
+      <input placeholder="Channel Name" id="channel_name" type="text" class="validate">
     </div>
   </div>
   <div class="modal-footer">
-    <a class="modal-action channel modal-close waves-effect waves-green btn-flat">Ajouter</a>
+    <a class="modal-action channel modal-close waves-effect waves-green btn-flat">Add</a>
   </div>
 </div>
 

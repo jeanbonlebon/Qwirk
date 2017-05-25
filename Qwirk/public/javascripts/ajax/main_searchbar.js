@@ -2,12 +2,17 @@ $(function() {
     var friends = new Bloodhound({
       datumTokenizer: Bloodhound.tokenizers.whitespace,
       queryTokenizer: Bloodhound.tokenizers.whitespace,
-      //prefetch: '/friend/findFriend',
       remote: {
           wildcard: '%QUERY',
-          url : '/friend/findFriend?query=%QUERY',
+          url : '/friend/findFriend/%QUERY',
       },
-      cache : true
+      cache : false
+    });
+
+    var channels = new Bloodhound({
+      datumTokenizer: Bloodhound.tokenizers.whitespace,
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      prefetch: '../data/nhl.json'
     });
 
     $('#SearchFriends .typeahead').typeahead(null, {
