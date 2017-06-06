@@ -4,8 +4,15 @@ var groups = require('../controllers/groups.js');
 var index = require('../controllers/index');
 
 router.post('/add', function(req, res, next) {
-    var result = groups.addGroup(req, res);
-    res.send();
+
+    groups.addGroup(req, res).then(function(results){
+        if(results){
+            return res.json({status : 300, group: results});
+        }else{
+            return res.json({status : 404});
+        }
+    });
+
 });
 
 router.get('/:name', index.getMyFriends, index.GetMyGroups, index.GetMyChannels, function(req, res) {
@@ -29,9 +36,20 @@ router.get('/:name', index.getMyFriends, index.GetMyGroups, index.GetMyChannels,
 
 });
 
-router.delete('/del/:name', function(req, res) {
+router.post('/update/:name', function(req, res) {
     //var result = groups.addGroup(req, res);
     //res.send();
+});
+
+router.get('/del/:name', index.getMyFriends, index.GetMyGroups, index.GetMyChannels, function(req, res) {
+
+      groups.delGroup(req, res).then(function(results){
+          if(results){
+              return res.json({status : 300});
+          }else{
+              return res.json({status : 404});
+          }
+      });
 });
 
 module.exports = router;

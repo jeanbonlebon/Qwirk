@@ -43,7 +43,7 @@ $(function() {
           suggestion: function(data) {
               console.log(data);
               return '<div><strong>' + data + '</strong>' +
-              '<a href="javascript:;;" id="' + data + '" class="add_friend" onClick="dontClose()"><i class="material-icons">add</i></a>'+
+              '<a href="javascript:;;" id="' + data + '" class="pluss add_friend" onClick="dontClose()"><i class="material-icons">add</i></a>'+
 
               '<div class="preloader"><img src="/images/loading.gif"></div>'+
               '<div class="check"><i class="material-icons">done</i></div>'+
@@ -63,7 +63,7 @@ $(function() {
         suggestion: function(data) {
             console.log(data);
             return '<div><strong>' + data + '</strong>' +
-            '<a href="javascript:;;" id="' + data + '" class="add_friend" onClick="dontClose()"><i class="material-icons">add</i></a>'+
+            '<a href="javascript:;;" id="' + data + '" class="pluss join_channel" onClick="dontClose()"><i class="material-icons">add</i></a>'+
 
             '<div class="preloader"><img src="/images/loading.gif"></div>'+
             '<div class="check"><i class="material-icons">done</i></div>'+
@@ -81,7 +81,6 @@ $(function() {
   });
 
   function dontClose(e) {
-    console.log('Ajouter Friend');
      e = e || event;
     if (e.bubbles && e.stopPropagation) {
         e.stopPropagation();
@@ -91,7 +90,8 @@ $(function() {
     }
 
     var targetElement =   $(e.target);
-    var friendUsername = targetElement.parent('a').attr('id');
+    var friendUsername = targetElement.parent('a.add_friend').attr('id');
+    var channelName = targetElement.parent('a.join_channel').attr('id');
 
     if (friendUsername !== undefined){
         var parameters = { data : friendUsername };
@@ -100,6 +100,7 @@ $(function() {
         targetElement.parent('a').hide();
         targetElement.parent('a').next('.preloader').show();
 
+        /*
         $.post('/friend/addFriend', parameters, function(data) {
           }).done(function (data) {
               targetElement.parent('a').next('.preloader').hide();
@@ -110,6 +111,15 @@ $(function() {
               targetElement.parent('a').show();
               console.log('fail !');
           });
+        */
+    }
+
+    if (channelName !== undefined){
+        var parameters = { data : channelName };
+        console.log(parameters);
+
+        targetElement.parent('a').hide();
+        targetElement.parent('a').next('.preloader').show();
     }
 
     return false;

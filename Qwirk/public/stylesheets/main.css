@@ -133,7 +133,7 @@ header nav li#SearchFriends span.twitter-typeahead .tt-menu h3{
     color:#FFF;
 }
 
-.tt-suggestion .add_friend{
+.tt-suggestion .pluss{
     position: absolute;
     right: 20px;
     top:0;
@@ -141,11 +141,11 @@ header nav li#SearchFriends span.twitter-typeahead .tt-menu h3{
     color: #FFF;
 }
 
-.tt-suggestion .add_friend:hover i{
+.tt-suggestion .pluss:hover i{
     color:#FFF;
 }
 
-.tt-suggestion .add_friend i{
+.tt-suggestion .pluss i{
     color:black;
     margin-top:-8px;
 }
@@ -249,16 +249,17 @@ body #ContactNav ul li a{
     position:relative;
     height:100%;
 }
+
 .wrap{
     padding: 0 10%;
 }
 
 .wrapper .console{
-    position:absolute;
+    position:fixed;
     bottom:0;
     background-color: #e1bee7;
     padding: 10px 20px;
-    width: 80%;
+    width: 58%;
 }
 .wrapper .console input{
     background-color: #FFF;
@@ -425,5 +426,5 @@ label::before {
     color:#FFF;
 }
 #members .row .col img{
-    width: 70px;
+    width:75%;
 }

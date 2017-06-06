@@ -9,28 +9,44 @@ router.get('/', function(req, res){
     res.render('home', {user: req.user});
 });
 
-//displays our signup page
+
+/*
+var io = req.app.io;
+io.on('connection', function(socket){
+    console.log("connected from the client side");
+});
+*/
+
 router.get('/signin', function(req, res){
-  res.render('signin');
+    res.render('signin');
 });
 
-//sends the request through our local signup strategy, and if successful takes user to homepage, otherwise returns then to signin page
+
 router.post('/local-reg', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/signin',
+  failureRedirect: '/',
   failureFlash: true
   })
 );
 
-//sends the request through our local login/signin strategy, and if successful takes user to homepage, otherwise returns then to signin page
+
 router.post('/login', passport.authenticate('local-signin', {
   successRedirect: '/',
-  failureRedirect: '/signin'
+  failureRedirect: '/',
+  failureFlash: true
   })
 );
 
-//logs user out of site, deleting them from the session, and returns to homepage
+
 router.get('/logout', function(req, res){
+  /*
+  var io = req.app.io;
+  io.on('connection', function(socket){
+      socket.on('disconnect', function(){
+          console.log( socket.name + ' has disconnected from the chat.' + socket.id);
+      });
+  });
+  */
   var name = req.user.username;
   console.log("LOGGIN OUT " + req.user.username)
   req.logout();
@@ -54,7 +70,7 @@ passport.use('local-signin', new LocalStrategy(
       }
       if (!user) {
         console.log("COULD NOT LOG IN");
-        req.session.error = 'Could not log user in. Please try again.'; //inform user could not log them in
+        req.session.error = 'Could not log user in. Please try again.';
         done(null, user);
       }
     })
@@ -63,9 +79,9 @@ passport.use('local-signin', new LocalStrategy(
     });
   }
 ));
-// Use the LocalStrategy within Passport to register/"signup" users.
+
 passport.use('local', new LocalStrategy(
-  {passReqToCallback : true}, //allows us to pass back the request to the callback
+  {passReqToCallback : true},
   function(req, username, password, done) {
     funct.localReg(username, password)
     .then(function (user) {
@@ -76,7 +92,7 @@ passport.use('local', new LocalStrategy(
       }
       if (!user) {
         console.log("COULD NOT REGISTER");
-        req.session.error = 'That username is already in use, please try a different one.'; //inform user could not log them in
+        req.session.error = 'That username is already in use, please try a different one.'; 
         done(null, user);
       }
     })

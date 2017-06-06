@@ -23,9 +23,9 @@
 
   <script>
   $('.search').on('click', '.open-search', function() {
-  $('[name="search"]').toggleClass('show')
-});
-</script>
+      $('[name="search"]').toggleClass('show')
+  });
+  </script>
 
   <div class="wrap">
 
@@ -53,10 +53,11 @@
   <div class="modal-content">
     <h4>Delete this group</h4>
     <p>Are you sure you want to delete the group {{#each selectedGroup}}{{name}}{{/each}} ?</p>
+    <input id="gpname_del" type="hidden" value="{{#each selectedGroup}}{{name}}{{/each}}">
   </div>
   <div class="modal-footer">
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Yes</a>
-    <a href="#!" class="modal-action waves-effect waves-green btn-flat">No</a>
+    <a href="#!" class="modal-action waves-effect waves-green btn-flat validate">Yes</a>
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">No</a>
   </div>
 </div>
 
@@ -67,7 +68,7 @@
         <div class="row">
             <div class="col s1 offset-s1"><img src="/images/{{avatar}}" class="responsive-img"></div>
             <div class="col s3">{{user}}</div>
-            <div class="col s1 offset-s5"><div class="del"><a href="#"><i class="material-icons">delete</i></a></div></div>
+            <div class="col s1 offset-s5"><div class="del"><a href="/"><i class="material-icons">delete</i></a></div></div>
         </div>
     {{/each}}
   </div>

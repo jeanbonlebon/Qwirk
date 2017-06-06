@@ -19,19 +19,26 @@ module.exports = {
       groupCollection.findOne({'name': groupName})
         .then(function (result) {
           if (null != result) {
-            console.log("GROUPNAME ALREADY EXISTS:", result.name);
+            //var txt_error = result.name, "already exist";
             deferred.resolve(false);
           } else {
             console.log("CREATING GROUP:", groupName);
             groupCollection.insert({name: groupName,admin: username})
-            .then(function () {db.close()});
-            usersGroupCollection.insert({group_name: groupName,user: username,avatar: avatar})
-            .then(function () {db.close()});
-            deferred.resolve(true);
+            .then(function (erreur, results) {
+                if (err){
+                  db.close();
+                  deferred.resolve(false);
+                }else{
+                  usersGroupCollection.insert({group_name: groupName,user: username,avatar: avatar});
+                  db.close();
+                  deferred.resolve(groupName);
+                }
+            });
           }
         return deferred.promise;
       })
     });
+    return deferred.promise;
   },
 
   getGroup: function (req, res) {
@@ -63,6 +70,33 @@ module.exports = {
       })
     });
     return deferred.promise;
-  }
+  },
+
+
+
+  delGroup: function (req, res) {
+    Q = require('q');
+    var deferred = Q.defer();
+    var name = req.params.name;
+
+    this.connectMongo(function (err, db) {
+      var groupCollection = db.collection('groups');
+      var usersGroupCollection = db.collection('users_groups');
+
+          groupCollection.remove({name: name})
+            .then(function (erreur, results) {
+                if (err){
+                  db.close();
+                  deferred.resolve(false);
+                }else{
+                  usersGroupCollection.remove({group_name: name});
+                  db.close();
+                  deferred.resolve(true);
+                }
+          });
+      });
+      return deferred.promise;
+  },
+
 
 };

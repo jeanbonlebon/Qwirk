@@ -26,23 +26,11 @@
     </div>
 </div>
 
-<style>
-.wrapper{
-    overflow: auto;
-    height: 95%;
-}
-.wrapper .console{
-    position:fixed;
-    width: 58%;
-}
-</style>
-<script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript">
 
    $(function () {
      var socket = io();
      var user = $('.test').text();
-     var socket = io();
 
      $('#send').click(function(event){
        event.preventDefault();

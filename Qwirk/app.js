@@ -26,21 +26,18 @@ var groups   = require('./routes/groups');
 var channels = require('./routes/channels');
 
 var app = express();
-/*
-var app = require('express')();
-*/
 
-//var hbs = require('exphbs');
+
 // Configure express to use handlebars templates
-
-
 var hbs = exphbs.create({
     defaultLayout: 'main',
     partialsDir: 'views/partials/',
     helpers: {
+      //Parse response in json
       toJSON : function(object) {
         return JSON.stringify(object);
       },
+      //Check if user is admin of the group
       ifCondGrp : function(v1, v2, options) {
       var v2 = options['data']['root']['selectedGroup'][0]['admin'];
       if(v1 === v2) {
@@ -48,6 +45,7 @@ var hbs = exphbs.create({
         }
         return options.inverse(this);
       },
+      //Check if user is admin of the channel
       ifCondChl : function(v1, v2, options) {
       var v2 = options['data']['root']['selectedChannel'][0]['admin'];
       if(v1 === v2) {
