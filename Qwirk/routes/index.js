@@ -3,8 +3,11 @@ var router = express.Router();
 
 var index = require('../controllers/index');
 
-/* GET home page. */
-router.get('/', index.getMyFriends, index.GetMyGroups, index.GetMyChannels, index.GetHome);
 
+/* GET home page. */
+router.get('/', index.getMyFriends, index.GetMyGroups, index.GetMyChannels, function(req,res){
+  
+    res.render('home', {user: req.user, friends: req.friend, groups: req.groups, channels: req.channels});
+});
 
 module.exports = router;

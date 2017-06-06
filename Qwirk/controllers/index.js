@@ -73,7 +73,3 @@ exports.GetMyChannels = function(req, res, next){
     next();
   }
 }
-
-exports.GetHome = function(req, res){
-    res.render('home', {user: req.user, friends: req.friend, groups: req.groups, channels: req.channels});
-}

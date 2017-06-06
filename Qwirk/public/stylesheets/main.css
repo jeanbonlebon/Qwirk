@@ -3,6 +3,10 @@ html, body{
   	height:100%;
 }
 
+.modal{
+    display:block;
+    z-index:999;
+}
 body{
   	margin:0;
 }
@@ -78,6 +82,9 @@ header nav li.userMenu a img{
     margin-top: 3px;
 }
 
+.dropdown-content li>a, .dropdown-content li>span{
+    color: rebeccapurple;
+}
 header nav li#SearchFriends{
     width:500px;
 }
@@ -102,6 +109,15 @@ header nav li#SearchFriends span.twitter-typeahead .tt-menu{
     -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
     box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+header nav li#SearchFriends span.twitter-typeahead .tt-menu h3{
+    color: #000;
+    font-size: 20px;
+    margin: 5px 23px 0px 23px;
+    font-weight: bold;
+    border-bottom: solid 1px #EEE;
+    padding: 5px 0;
 }
 
 .tt-suggestion{
@@ -274,7 +290,6 @@ body #ContactNav ul li a{
     margin-bottom: 0;
     background-color: #f3e5f5;
     transition: top 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
-    overflow: hidden;
     box-sizing: border-box;
     position: absolute;
     top: -64px;
@@ -303,7 +318,7 @@ body #ContactNav ul li a{
     font-size: 17px;
     text-align: center;
     cursor: pointer;
-    margin: 17px 50px;
+    margin: 15px 50px;
     transition: all 500ms ease;
     z-index: 99;
     padding: 15px;
@@ -352,4 +367,63 @@ label::before {
 .nav_admin .icon_admingr li a i{
     font-size: 40px;
     color:#f3e5f5;
+}
+
+.nav_admin .open-search {
+  color: white;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.nav_admin input[type=search] {
+
+
+  display: inline-block;
+  padding: 0;
+  vertical-align: bottom !important;
+
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  border: 0;
+  color: teal;
+  width: 0;
+}
+.nav_admin input[type=search]::-webkit-input-placeholder {
+  color: #000;
+}
+.nav_admin input[type=search]::-moz-placeholder {
+  color: #000;
+}
+.nav_admin input[type=search]:-moz-placeholder {
+  color: #000;
+}
+.nav_admin input[type=search]:-ms-input-placeholder {
+  color: #000;
+}
+.nav_admin input[type=search].show {
+  width: 16rem;
+}
+
+
+
+#members .row .col{
+    float:none;
+    display:inline-block;
+    vertical-align: middle;
+}
+#members .row .col .del{
+    text-align: center;
+    display: inherit;
+    border-radius: 50%;
+    background-color: #e1bee7;
+    width: 50px;
+    height: 50px;
+    padding-top: 4px;
+}
+#members .row .col .del a i{
+    font-size: 40px;
+    color:#FFF;
+}
+#members .row .col img{
+    width: 70px;
 }

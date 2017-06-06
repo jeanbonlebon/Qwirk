@@ -1,0 +1,37 @@
+<nav id="ContactNav" class="col s3">
+    <section class="row">
+        <h5 class="col s9">Recent friends</h5>
+    </section>
+    <ul id="friendList" class="row">
+        {{#each friends}}
+            <li><a href="/users/{{friend2}}">{{friend2}}</a></li>
+        {{/each}}
+    </ul>
+
+    <section class="row">
+        <h5 class="col s9">Recent groups</h5>
+        <div class="col s3 add">
+            <a class="group waves-effect waves-light" href="#group-modal"><i class="material-icons">add</i></a>
+        </div>
+    </section>
+    <ul id="groupList" class="row">
+        {{#each groups}}
+            <li><a href="/groups/{{group_name}}">{{group_name}}</a></li>
+        {{/each}}
+    </ul>
+
+    <section class="row">
+        <h5 class="col s9">Recent channels</h5>
+        <div class="col s3 add">
+            <a class="channel waves-effect waves-light" href="#channel-modal"><i class="material-icons">add</i></a>
+        </div>
+    </section>
+    <ul id="channelList" class="row">
+        {{#each channels}}
+            <li><a href="/channels/{{channel_name}}">{{channel_name}}</a></li>
+        {{/each}}
+    </ul>
+
+</nav>
+
+{{> modals/create}}

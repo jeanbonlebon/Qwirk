@@ -1,0 +1,26 @@
+<header class="container_fluid">
+
+  <nav role="navigation">
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo">Qwirk</a>
+      <ul class="right hide-on-med-and-down">
+        <li id="SearchFriends">
+            <input class="typeahead" type="text" placeholder="Search Users and Channels">
+        </li>
+        <!-- Dropdown Trigger -->
+        <li class="userMenu">
+            <a class="dropdown-button" href="#!" data-activates="userMenu">
+                <img src="/images/{{user.avatar}}" class="responsive-img">
+            </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- Dropdown Structure -->
+  <ul id="userMenu" class="dropdown-content">
+    <li><a id="myProfil" href="/users/{{user.username}}" rel="{{user.username}}">My Profil</a></li>
+    <li class="divider"></li>
+    <li><a href="/auth/logout">Log Out</a></li>
+  </ul>
+
+</header>

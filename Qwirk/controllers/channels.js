@@ -31,5 +31,76 @@ module.exports = {
         return deferred.promise;
       })
     });
+  },
+
+
+  getChannel: function (req, res) {
+    Q = require('q');
+    var deferred = Q.defer();
+    var name = req.params.name;
+
+    this.connectMongo(function (err, db) {
+      var channelCollection = db.collection('channels');
+      var usersChannelCollection = db.collection('users_channels');
+
+      channelCollection.find({'name': name})
+        .toArray(function (err, results) {
+          if (err) {
+            deferred.resolve(false);
+          } else {
+            res.selectedChannel = results;
+            usersChannelCollection.find({'channel_name': name})
+              .toArray(function (err, results) {
+                if (err) {
+                  deferred.resolve(false);
+                } else {
+                  res.selectedChannelUsers = results;
+                  deferred.resolve(true);
+                  return res;
+                }
+              })
+          }
+      })
+    });
+    return deferred.promise;
+  },
+
+
+  getChannelsList: function (req, res) {
+
+    this.connectMongo(function (err, db) {
+      var collection = db.collection('users_channels');
+
+      var channelResult = [];
+      var mySelf = req.user.username;
+
+      var req_String = req.params[0];
+      var req_StringClear = req_String.substring(14);
+
+      collection.find({
+          $and: [{
+              user: {
+                $ne: mySelf
+              }},{
+              channel_name: {
+                '$regex' : '^'+req_StringClear+'', '$options' : 'i'
+              }}
+            ]
+        })
+        .toArray(function (err, results) {
+          if (err) {
+            res.json("Error");
+          }
+          console.log(results);
+          results.forEach(function (results) {
+              channelResult.push(results.channel_name);
+          });
+          console.log(channelResult);
+          db.close();
+          res.json(channelResult);
+        })
+    });
   }
+
+
 };

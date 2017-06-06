@@ -8,70 +8,75 @@
   <meta name="description" content="User Authentication">
   <meta name="author" content="">
 
-  <title>User Authentication</title>
+  <title>Qwirk</title>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="public/stylesheets/main.css" rel="stylesheet">
+  <link href="/stylesheets/main.css" rel="stylesheet">
+
 
   </head>
 
+  <body>
+
+    {{> utils/alerts}}
+
     {{#if user}}
-    <body>
 
-    <header class="container_fluid">
+        {{> nav/nav_top}}
 
-      <nav role="navigation">
-        <div class="nav-wrapper">
-          <a href="/" class="brand-logo">Qwirk</a>
-          <ul class="right hide-on-med-and-down">
-            <li id="SearchFriends">
-                <input class="typeahead" type="text" placeholder="Search Friends">
-            </li>
-            <!-- Dropdown Trigger -->
-            <li class="userMenu">
-                <a class="dropdown-button" href="#!" data-activates="userMenu">
-                    <img src="public/images/{{user.avatar}}" class="responsive-img">
-                </a>
-            </li>
-          </ul>
+        <div id="main_content" class="row">
+
+            {{> nav/nav_left}}
+
+            <section id="playground" class="col s9">
+
+                {{> utils/loader}}
+
+                {{{body}}}
+
+            </section>
+
         </div>
-      </nav>
-      <!-- Dropdown Structure -->
-      <ul id="userMenu" class="dropdown-content">
-        <li><a id="myProfil" href="/users/{{user.username}}" rel="{{user.username}}">My Profil</a></li>
-        <li class="divider"></li>
-        <li><a href="auth/logout">Log Out</a></li>
-      </ul>
 
-    </header>
+    {{else}}
 
+        {{> forms/login}}
 
+        {{{body}}}
 
     {{/if}}
 
-    <body>
-
-
-    {{#if error}}
-      <p class="alert alert-warning">{{error}}</p>
-    {{/if}}
-
-    {{#if success}}
-      <p class="alert alert-success">{{success}}</p>
-    {{/if}}
-
-    {{#if notice}}
-      <p class="alert alert-info">{{notice}}</p>
-    {{/if}}
-
-    <!--where our other templates will insert-->
-    {{{body}}}
 
     </div> <!-- /container -->
+
+    <!-- Modal Structures -->
+    <div id="group-modal" class="modal">
+      <div class="modal-content">
+        <h4>Create a group</h4><hr/>
+        <div class="input-field col s6">
+          <input placeholder="Group Name" id="group_name" type="text" class="validate">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a class="modal-action group modal-close waves-effect waves-green btn-flat">Add</a>
+      </div>
+    </div>
+
+    <div id="channel-modal" class="modal">
+      <div class="modal-content">
+        <h4>Create a Channel</h4><hr/>
+        <div class="input-field col s6">
+          <input placeholder="Channel Name" id="channel_name" type="text" class="validate">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a class="modal-action channel modal-close waves-effect waves-green btn-flat">Add</a>
+      </div>
+    </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -83,19 +88,21 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.8/handlebars.min.js"></script>
 
-    <script src="bower_components/typeahead.js/dist/bloodhound.js"></script>
-    <script src="bower_components/typeahead.js/dist/typeahead.jquery.js"></script>
-    <script src="bower_components/typeahead.js/dist/typeahead.bundle.js"></script>
-    <script src="bower_components/typeahead.js/dist/typeahead.bundle.min.js"></script>
+    <script src="../bower_components/typeahead.js/dist/bloodhound.js"></script>
+    <script src="../bower_components/typeahead.js/dist/typeahead.jquery.js"></script>
+    <script src="../bower_components/typeahead.js/dist/typeahead.bundle.js"></script>
+    <script src="../bower_components/typeahead.js/dist/typeahead.bundle.min.js"></script>
 
     <!-- Main JS File -->
-    <script src="public/javascripts/main.js"></script>
+    <script src="/javascripts/main.js"></script>
 
     <!-- Ajax JQuery File -->
-    <script src="public/javascripts/ajax/ajax_friends.js"></script>
-    <script src="public/javascripts/ajax/ajax_profil.js"></script>
-    <script src="public/javascripts/ajax/ajax_groups.js"></script>
-    <script src="public/javascripts/ajax/main_searchbar.js"></script>
+    <!--
+    <script src="/javascripts/ajax/ajax_friends.js"></script>
+    <script src="/javascripts/ajax/ajax_profil.js"></script>
+    <script src="/javascripts/ajax/ajax_groups.js"></script>
+    -->
+    <script src="/javascripts/ajax/main_searchbar.js"></script>
 
 
 </body>

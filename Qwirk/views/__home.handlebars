@@ -1,0 +1,112 @@
+<!-- views/home.handlebars -->
+{{#if user}}
+
+<div id="main_content" class="row">
+
+    <nav id="ContactNav" class="col s3">
+        <section class="row">
+            <h5 class="col s9">Recent friends</h5>
+        </section>
+        <ul id="friendList" class="row">
+            {{#each friends}}
+                <li><a href="/users/{{friend2}}">{{friend2}}</a></li>
+            {{/each}}
+        </ul>
+
+        <section class="row">
+            <h5 class="col s9">Recent groups</h5>
+            <div class="col s3 add">
+                <a class="group waves-effect waves-light" href="#group-modal"><i class="material-icons">add</i></a>
+            </div>
+        </section>
+        <ul id="groupList" class="row">
+            {{#each groups}}
+                <li><a href="/groups/{{group_name}}">{{group_name}}</a></li>
+            {{/each}}
+        </ul>
+
+        <section class="row">
+            <h5 class="col s9">Recent channels</h5>
+            <div class="col s3 add">
+                <a class="channel waves-effect waves-light" href="#channel-modal"><i class="material-icons">add</i></a>
+            </div>
+        </section>
+        <ul class="row">
+            {{#each channels}}
+                <li><a href="#">{{channel_name}}</a></li>
+            {{/each}}
+        </ul>
+
+    </nav>
+    <section id="playground" class="col s9">
+
+      <div id="loader" class="preloader-wrapper big active">
+          <div class="spinner-layer spinner-blue-only">
+              <div class="circle-clipper left">
+                  <div class="circle"></div>
+                  </div><div class="gap-patch">
+              <div class="circle"></div>
+              </div><div class="circle-clipper right">
+              <div class="circle"></div>
+              </div>
+          </div>
+      </div>
+
+      {{> group }}
+
+    </section>
+    <div id="modal-container"></div>
+</div>
+
+<!-- Modal Structures -->
+<div id="group-modal" class="modal">
+  <div class="modal-content">
+    <h4>Create a group</h4><hr/>
+    <div class="input-field col s6">
+      <input placeholder="Group Name" id="group_name" type="text" class="validate">
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action group modal-close waves-effect waves-green btn-flat">Add</a>
+  </div>
+</div>
+
+<div id="channel-modal" class="modal">
+  <div class="modal-content">
+    <h4>Create a Channel</h4><hr/>
+    <div class="input-field col s6">
+      <input placeholder="Channel Name" id="channel_name" type="text" class="validate">
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action channel modal-close waves-effect waves-green btn-flat">Add</a>
+  </div>
+</div>
+
+    {{else}}
+    <div class="bg_home">
+      <div class="container-fluid">
+
+        <form id="local-sign-in" class="collapse main_form" action="/auth/login" method="post">
+          <div>
+            <p></p>
+            <label>Username:</label>
+            <input type="text" name="username" />
+          </div>
+          <div>
+            <label>Password:</label>
+            <input type="password" name="password" />
+          </div>
+          <div class="row">
+            <div class="col s6">
+              <input type="submit" class="btn btn-primary btn-sm" value="Log In" />
+            </div>a
+            <div class="col s6">
+              <a href="/auth/signin" class="btn btn-default btn-md" role="button">Create a account</a>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- /.container-fluid -->
+    </div>
+    {{/if}}

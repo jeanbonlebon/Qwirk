@@ -1,0 +1,74 @@
+<input type="checkbox" name="toggle" id="toggle" />
+<label id="group_n" for="toggle">
+  {{#each selectedGroup}}
+      {{name}}
+  {{/each}}
+</label>
+<div class="wrapper">
+  {{#ifCondGrp myself v2}}
+      <div class="nav_admin row">
+          <div class="col s3">
+
+          </div>
+          <div class="col s9">
+              <ul class="icon_admingr search">
+                <input type="search" name="search" placeholder="Add Friend to Group" class="typeahead"/>
+                <li class="open-search"><a href="#"><i class="material-icons">search</i></a></li>
+                <li><a href="#members"><i class="material-icons">list</i></a></li>
+                <li><a href="#del_group"><i class="material-icons">delete</i></a></li>
+              </ul>
+          </div>
+      </div>
+  {{/ifCondGrp}}
+
+  <script>
+  $('.search').on('click', '.open-search', function() {
+  $('[name="search"]').toggleClass('show')
+});
+</script>
+
+  <div class="wrap">
+
+    <section class="friend_infos">
+
+
+    </section>
+    <section class="console">
+
+        <div class="row send">
+            <div class="col s11">
+                <input type="text">
+            </div>
+            <div class="col s1">
+                <a href="#"><i class="material-icons">replay</i></a>
+            </div>
+        </div>
+
+    </section>
+</div>
+</div>
+
+<!-- Modals -->
+<div id="del_group" class="modal">
+  <div class="modal-content">
+    <h4>Delete this group</h4>
+    <p>Are you sure you want to delete the group {{#each selectedGroup}}{{name}}{{/each}} ?</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Yes</a>
+    <a href="#!" class="modal-action waves-effect waves-green btn-flat">No</a>
+  </div>
+</div>
+
+<div id="members" class="modal bottom-sheet">
+  <div class="modal-content">
+    <h4>Group members</h4>
+    {{#each selectedGroupUsers}}
+        <div class="row">
+            <div class="col s1 offset-s1"><img src="/images/{{avatar}}" class="responsive-img"></div>
+            <div class="col s3">{{user}}</div>
+            <div class="col s1 offset-s5"><div class="del"><a href="#"><i class="material-icons">delete</i></a></div></div>
+        </div>
+    {{/each}}
+  </div>
+</div>

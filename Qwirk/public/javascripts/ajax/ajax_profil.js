@@ -1,5 +1,5 @@
 $(function() {
-
+    /*
     $("#myProfil").click(function (e) {
         e.preventDefault();
         var username = $(this).attr('rel');
@@ -15,6 +15,7 @@ $(function() {
         });
 
     });
+    */
 });
 
 Handlebars.registerHelper('toJSON', function(obj) {

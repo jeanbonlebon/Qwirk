@@ -1,6 +1,6 @@
 $(function() {
 
-
+/*
     $("#friendList li a").click(function (e) {
         e.preventDefault();
         var username = $(this).text();
@@ -21,6 +21,7 @@ $(function() {
 
 
     });
+  */
 });
 
 Handlebars.registerHelper('toJSON', function(obj) {

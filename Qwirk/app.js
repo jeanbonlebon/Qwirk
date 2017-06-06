@@ -26,16 +26,41 @@ var groups   = require('./routes/groups');
 var channels = require('./routes/channels');
 
 var app = express();
+/*
+var app = require('express')();
+*/
 
+//var hbs = require('exphbs');
 // Configure express to use handlebars templates
+
+
 var hbs = exphbs.create({
-    defaultLayout: 'main', //we will be creating this layout shortly
+    defaultLayout: 'main',
+    partialsDir: 'views/partials/',
     helpers: {
       toJSON : function(object) {
         return JSON.stringify(object);
+      },
+      ifCondGrp : function(v1, v2, options) {
+      var v2 = options['data']['root']['selectedGroup'][0]['admin'];
+      if(v1 === v2) {
+          return options.fn(this);
+        }
+        return options.inverse(this);
+      },
+      ifCondChl : function(v1, v2, options) {
+      var v2 = options['data']['root']['selectedChannel'][0]['admin'];
+      if(v1 === v2) {
+          return options.fn(this);
+        }
+        return options.inverse(this);
       }
+
     }
 });
+
+
+
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
@@ -49,8 +74,13 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(session({secret: 'supernova', saveUninitialized: true, resave: true}));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(stylus.middleware(path.join(__dirname, '/')));
-app.use(express.static(path.join(__dirname, '/')));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+/*
+app.use(stylus.middleware(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname, '/public')));
+*/
+//app.use(express.static('public/'));
 
 // Session-persisted message middleware
 app.use(function (req, res, next) {
@@ -81,8 +111,14 @@ module.exports = app;
 
 
 //===============PORT=================
-var port = process.env.PORT || 5050; //select your port or let it pull from your .env file
-app.listen(port);
+var port = process.env.PORT || 5050;
+var server = app.listen(port);
+
+//app.listen(port);
+
+var io = require('socket.io')(server);
+app.io = io;
+
 console.log("listening on " + port + "!");
 
 

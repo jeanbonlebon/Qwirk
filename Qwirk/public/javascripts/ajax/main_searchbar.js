@@ -12,25 +12,60 @@ $(function() {
     var channels = new Bloodhound({
       datumTokenizer: Bloodhound.tokenizers.whitespace,
       queryTokenizer: Bloodhound.tokenizers.whitespace,
-      prefetch: '../data/nhl.json'
+      remote: {
+          wildcard: '%QUERY',
+          url : '/channels/findChannels/%QUERY',
+      },
+      cache : false
     });
 
-    $('#SearchFriends .typeahead').typeahead(null, {
-      name: 'friends',
+    var myfriends = new Bloodhound({
+      datumTokenizer: Bloodhound.tokenizers.whitespace,
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      remote: {
+          wildcard: '%QUERY',
+          url : '/channels/findChannels/%QUERY',
+      },
+      cache : false
+    });
+
+    $('#SearchFriends .typeahead').typeahead({
+      highlight: true
+      },
+      {
+        name: 'friends',
+        display: 'value',
+        source: friends,
+        templates: {
+          header: '<h3>Users</h3>',
+          empty: [
+          ].join('\n'),
+          suggestion: function(data) {
+              console.log(data);
+              return '<div><strong>' + data + '</strong>' +
+              '<a href="javascript:;;" id="' + data + '" class="add_friend" onClick="dontClose()"><i class="material-icons">add</i></a>'+
+
+              '<div class="preloader"><img src="/images/loading.gif"></div>'+
+              '<div class="check"><i class="material-icons">done</i></div>'+
+
+              '</div>';
+          }
+        }
+      },
+      {
+      name: 'channels',
       display: 'value',
-      source: friends,
+      source: channels,
       templates: {
+        header: '<h3>Channels</h3>',
         empty: [
-          '<div class="empty-message">',
-            'We cant find any user with that name, Sorry !',
-          '</div>'
         ].join('\n'),
         suggestion: function(data) {
             console.log(data);
             return '<div><strong>' + data + '</strong>' +
             '<a href="javascript:;;" id="' + data + '" class="add_friend" onClick="dontClose()"><i class="material-icons">add</i></a>'+
 
-            '<div class="preloader"><img src="public/images/loading.gif"></div>'+
+            '<div class="preloader"><img src="/images/loading.gif"></div>'+
             '<div class="check"><i class="material-icons">done</i></div>'+
 
             '</div>';

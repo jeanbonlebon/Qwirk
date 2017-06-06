@@ -1,5 +1,6 @@
 $(function() {
 
+/*
     $("#groupList li a").click(function (e) {
         e.preventDefault();
         var group_name = $(this).text();
@@ -16,7 +17,7 @@ $(function() {
         });
 
     });
-
+*/
 });
 
 Handlebars.registerHelper('ifCond', function(v1, v2, options) {
@@ -26,6 +27,10 @@ Handlebars.registerHelper('ifCond', function(v1, v2, options) {
     return options.fn(this);
   }
   return options.inverse(this);
+});
+
+Handlebars.registerHelper('raw-helper', function(options) {
+    return options.fn();
 });
 
 function groupData(data2){
