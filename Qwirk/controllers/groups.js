@@ -102,13 +102,13 @@ module.exports = {
     Q = require('q');
     var deferred = Q.defer();
     var name = req.params.name;
-    console.log(name);
+    var group = req.query.group;
 
     this.connectMongo(function (err, db) {
       //var groupCollection = db.collection('groups');
       var usersGroupCollection = db.collection('users_groups');
 
-          usersGroupCollection.remove({user: name})
+          usersGroupCollection.remove({user: name, group_name: group})
             .then(function (erreur, results) {
                 if (err){
                   db.close();
@@ -119,6 +119,43 @@ module.exports = {
                 }
           });
       });
+      return deferred.promise;
+  },
+
+  AddAFriendtoGroup: function (req, res) {
+
+    var deferred = Q.defer();
+    var myFriend = req.body.data;
+    var myGroup = req.body.gname;
+
+      this.connectMongo(function (err, db) {
+        var collection = db.collection('users');
+        var collection_relations = db.collection('users_groups');
+
+            collection_relations.findOne({user: myFriend, group_name: myGroup})
+              .then(function (result) {
+                  console.log('1');
+                  if (null != result){
+                    db.close();
+                    deferred.resolve(false);
+                  }else{
+                    console.log('2');
+                    var groupRel = {
+                      "group_name": myGroup,
+                      "user": myFriend,
+                      "avatar": "img1.png"
+                    }
+                    console.log(groupRel);
+                    collection_relations.insert(groupRel)
+                    db.close();
+                    deferred.resolve(true);
+                  }
+                  console.log('4');
+            });
+            console.log('5');
+        });
+        console.log('6');
+
       return deferred.promise;
   }
 

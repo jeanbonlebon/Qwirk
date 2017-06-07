@@ -4,7 +4,7 @@ $(function() {
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       remote: {
           wildcard: '%QUERY',
-          url : '/friend/findFriend/%QUERY',
+          url : '/users/findFriend/%QUERY',
       },
       cache : false
     });
@@ -24,7 +24,7 @@ $(function() {
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       remote: {
           wildcard: '%QUERY',
-          url : '/channels/findChannels/%QUERY',
+          url : '/friend/findFriend/%QUERY',
       },
       cache : false
     });
@@ -77,6 +77,31 @@ $(function() {
         console.log('Selection du Profil');
     })
 
+    $('#adminBar .typeahead').typeahead({
+      hint: true,
+      highlight: true,
+      minLength: 1
+    },
+    {
+    name: 'myfriends',
+    display: 'value',
+    source: myfriends,
+    templates: {
+      empty: [
+      ].join('\n'),
+      suggestion: function(data) {
+          console.log(data);
+          return '<div><strong>' + data + '</strong>' +
+          '<a href="javascript:;;" id="' + data + '" class="pluss add_frie" onClick="dontClose()"><i class="material-icons">add</i></a>'+
+
+          '<div class="preloader"><img src="/images/loading.gif"></div>'+
+          '<div class="check"><i class="material-icons">done</i></div>'+
+
+          '</div>';
+      }
+    }
+    });
+
 
   });
 
@@ -93,6 +118,10 @@ $(function() {
     var friendUsername = targetElement.parent('a.add_friend').attr('id');
     var channelName = targetElement.parent('a.join_channel').attr('id');
 
+    var friendGroup = targetElement.parent('a.add_frie').attr('id');
+    var nameGroup = $('#gpname_del').val();
+
+
     if (friendUsername !== undefined){
         var parameters = { data : friendUsername };
         console.log(parameters);
@@ -100,7 +129,7 @@ $(function() {
         targetElement.parent('a').hide();
         targetElement.parent('a').next('.preloader').show();
 
-        /*
+
         $.post('/friend/addFriend', parameters, function(data) {
           }).done(function (data) {
               targetElement.parent('a').next('.preloader').hide();
@@ -111,7 +140,7 @@ $(function() {
               targetElement.parent('a').show();
               console.log('fail !');
           });
-        */
+
     }
 
     if (channelName !== undefined){
@@ -120,6 +149,27 @@ $(function() {
 
         targetElement.parent('a').hide();
         targetElement.parent('a').next('.preloader').show();
+    }
+
+    if (friendGroup !== undefined){
+        var parameters = { data : friendGroup, gname : nameGroup };
+        console.log(parameters);
+
+        targetElement.parent('a').hide();
+        targetElement.parent('a').next('.preloader').show();
+
+        $.post('/groups/addFriend', parameters, function(data) {
+          }).done(function (data) {
+              targetElement.parent('a').next('.preloader').hide();
+              targetElement.parent('a').next('.preloader').next('.check').show();
+              window.location.href = "/groups/"+parameters.gname;
+          }).fail(function (jqXHR, textStatus) {
+              targetElement.parent('a').next('.preloader').hide();
+              targetElement.parent('a').show();
+              console.log('done !');
+              //window.location.href = "/groups/"+parameters.nameGroup;
+          });
+
     }
 
     return false;

@@ -10,6 +10,10 @@ $(function() {
 
   $('.modal').modal();
 
+  //Tooltip for group users
+  $('.tooltipped').tooltip({delay: 50});
+
+
   $('.modal-footer > a.group').click(function () {
     var groupName = $('input#group_name').first().val();
     $.post('/groups/add', { name: groupName })
@@ -25,6 +29,18 @@ $(function() {
       .fail(function() {alert( "error" )})
   })
 /////////////////// GROUPS ///////////////////////////////
+$('#quit_group .modal-footer > a.validate').click(function () {
+  var groupNametoQuit = $('input#gpname_quit').val();
+  var groupUsertoQuit = $('input#guser_quit').val();
+  console.log(groupNametoQuit+groupUsertoQuit);
+
+  $.get('/groups/kick/'+groupUsertoQuit, {name: groupUsertoQuit, group: groupNametoQuit})
+    .done(function( data ) {
+        window.location.href = "/";
+    })
+    .fail(function() {alert( "error" )})
+
+})
   $('#del_group .modal-footer > a.validate').click(function () {
     var groupNametoDel = $('input#gpname_del').val();
     $.get('/groups/del/'+groupNametoDel, { name: groupNametoDel })
@@ -36,25 +52,25 @@ $(function() {
   $('#admin_group .modal-content a.group_member').click(function () {
     var group_member = $(this).attr('id');
     var groupNametoDel = $('input#gpname_del').val();
-    console.log(group_member);
-    console.log(groupNametoDel);
 
-    $.get('/groups/kick/'+group_member, {name: group_member})
+    $.get('/groups/kick/'+group_member, {name: group_member, group: groupNametoDel})
       .done(function( data ) {
           window.location.href = "/groups/"+groupNametoDel;
       })
       .fail(function() {alert( "error" )})
 
   })
-  /*
+
   //SocketIO Initiator and Closure
   $('#local-sign-in').submit(function(event){
     var socket = io();
+    console.log('USER !')
+    //socket.emit('connexion', 'data');
     socket.emit('connexion', 'data');
   });
   $('#logout_user').click(function () {
     var socket = io();
     socket.disconnect();
   });
-  */
+
 });

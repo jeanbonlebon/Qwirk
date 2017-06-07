@@ -1,5 +1,5 @@
 Q = require('q'),
-config = require('../config.js'); //config file contains all tokens and other private info
+config = require('../config.js');
 
 var mongodbUrl = 'mongodb://' + config.mongodbHost + ':27017/qwirk';
 var MongoClient = require('mongodb').MongoClient
@@ -9,51 +9,33 @@ var deferred = Q.defer();
 exports.getFriendList = function (req, res) {
 
   MongoClient.connect(mongodbUrl, function (err, db) {
-    var collection = db.collection('users');
     var collection_frie = db.collection('users_relation');
 
-    var userResult2 = [];
     var userResult = [];
     var mySelf = req.user.username;
 
     var req_String = req.params[0];
     var req_StringClear = req_String.substring(12);
 
-    console.log(req_StringClear);
-
     collection_frie.find({
-        friend1: mySelf
+      $and: [{
+          friend1: mySelf
+        },{
+          friend2: {
+            '$regex' : '^'+req_StringClear+'', '$options' : 'i'
+          }}
+        ]
       })
       .toArray(function (err, results) {
         if (err) {
+          db.close();
           res.json("Error");
         }
         results.forEach(function (results) {
           userResult.push(results.friend2);
         });
-        userResult.push(mySelf);
-        collection.find({
-          $and: [{
-              username: {
-                $nin: userResult
-              }},{
-              username: {
-                '$regex' : '^'+req_StringClear+'', '$options' : 'i'
-              }}
-            ]
-          })
-          .toArray(function (err, results2) {
-            if (err) {
-              res.json("Error");
-            }
-            console.log(results2);
-            results2.forEach(function (results2) {
-              userResult2.push(results2.username);
-            });
-
-            db.close();
-            res.json(userResult2);
-          })
+        db.close();
+        res.json(userResult);
       })
   })
 }

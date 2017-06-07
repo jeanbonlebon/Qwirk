@@ -4,7 +4,7 @@
     <div class="nav-wrapper">
       <a href="/" class="brand-logo">Qwirk</a>
       <ul class="right hide-on-med-and-down">
-        <li id="SearchFriends">
+        <li id="SearchFriends" class="searchBar">
             <input class="typeahead" type="text" placeholder="Search Users and Channels">
         </li>
         <!-- Dropdown Trigger -->
@@ -18,7 +18,7 @@
   </nav>
   <!-- Dropdown Structure -->
   <ul id="userMenu" class="dropdown-content">
-    <li><a id="myProfil" href="/users/{{user.username}}" rel="{{user.username}}">My Profil</a></li>
+    <li><a id="myProfil" href="/profil" rel="{{user.username}}">My Profil</a></li>
     <li class="divider"></li>
     <li><a id="logout_user" href="/auth/logout">Log Out</a></li>
   </ul>

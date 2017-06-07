@@ -4,30 +4,14 @@ var router = express.Router();
 var usr = require('../controllers/users.js');
 var index = require('../controllers/index');
 
-
+/*
 router.get('/', function(req, res, next) {
     res.send('respond with a resource');
 });
+*/
 
 router.get('/:username',index.getMyFriends, index.GetMyGroups, index.GetMyChannels, function(req, res) {
 
-    /*
-    console.log('////////////////////////////////////////////////');
-    console.log(req.app.io);
-    console.log('////////////////////////////////////////////////');
-    var io = req.app.io;
-
-      socket.on('84585', function(msg, user){
-          console.log(socket.id);
-
-          console.log(user);
-          console.log('message: ' + msg);
-
-          io.emit('84585', msg);
-          //socket.broadcast.emit('84585', msg);
-      });
-    */
-    
     usr.GetAUser(req, res).then(function(results){
         if(results){
             //return res.jqXHR({status : 404});
@@ -48,6 +32,11 @@ router.get('/:username',index.getMyFriends, index.GetMyGroups, index.GetMyChanne
         }
     });
 
+});
+
+router.get(/^(.*)$/, function(req, res){
+    usr.getUserList(req, res);
+    return res;
 });
 
 module.exports = router;

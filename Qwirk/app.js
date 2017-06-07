@@ -94,6 +94,27 @@ app.use(function (req, res, next) {
     if (msg) res.locals.notice = msg;
     if (success) res.locals.success = success;
 
+    if (req.user){
+      /* Socket IO  set new clients in array */
+      Array.prototype.contains = function(obj) {
+          var i = this.length;
+          while (i--) {
+              if (this[i] == obj) {
+                  return true;
+              }
+          }
+          return false;
+      }
+
+      if (sockets_usernames.contains(req.user.username)){
+      }else{
+          sockets_usernames.push(req.user.username)
+      }
+    }
+    console.log('/////////////////////////////');
+    console.log(sockets_usernames);
+    console.log('/////////////////////////////');
+
     next();
 });
 
@@ -114,8 +135,19 @@ var server = app.listen(port);
 
 //app.listen(port);
 
+var sockets_usernames = [];
+
 var io = require('socket.io')(server);
+require('./controllers/socket_io')(io);
+
+/*
 app.io = io;
+
+console.log('////////////////////////////////////////////////');
+console.log(req.app.io);
+console.log('////////////////////////////////////////////////');
+var io = req.app.io;
+*/
 
 console.log("listening on " + port + "!");
 
