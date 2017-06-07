@@ -149,6 +149,17 @@ $(function() {
 
         targetElement.parent('a').hide();
         targetElement.parent('a').next('.preloader').show();
+
+        $.post('/channels/joinChannel', parameters, function(data) {
+          }).done(function (data) {
+              targetElement.parent('a').next('.preloader').hide();
+              targetElement.parent('a').next('.preloader').next('.check').show();
+              console.log('done !');
+          }).fail(function (jqXHR, textStatus) {
+              targetElement.parent('a').next('.preloader').hide();
+              targetElement.parent('a').show();
+              console.log('fail !');
+          });
     }
 
     if (friendGroup !== undefined){

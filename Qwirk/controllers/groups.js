@@ -134,12 +134,10 @@ module.exports = {
 
             collection_relations.findOne({user: myFriend, group_name: myGroup})
               .then(function (result) {
-                  console.log('1');
                   if (null != result){
                     db.close();
                     deferred.resolve(false);
                   }else{
-                    console.log('2');
                     var groupRel = {
                       "group_name": myGroup,
                       "user": myFriend,
@@ -150,11 +148,8 @@ module.exports = {
                     db.close();
                     deferred.resolve(true);
                   }
-                  console.log('4');
             });
-            console.log('5');
         });
-        console.log('6');
 
       return deferred.promise;
   }

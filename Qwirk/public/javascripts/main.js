@@ -25,7 +25,9 @@ $(function() {
   $('.modal-footer > a.channel').click(function () {
     var channelName = $('input#channel_name').first().val();
     $.post('/channels/add', { name: channelName })
-      .done(function( data ) {console.log( data )})
+      .done(function( data ) {
+          //window.location.href = "/channels/"+data.group;
+      })
       .fail(function() {alert( "error" )})
   })
 /////////////////// GROUPS ///////////////////////////////

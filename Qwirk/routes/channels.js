@@ -34,6 +34,19 @@ router.get('/:name', index.getMyFriends, index.GetMyGroups, index.GetMyChannels,
 
 });
 
+router.post('/joinChannel', function(req, res){
+
+    channels.joinChannel(req, res).then(function(result){
+        if(result){
+            return res.json({success : "Updated Successfully", status : 200});
+        }else{
+            return res.json({success : "Failure", status : 404});
+        }
+    })
+
+});
+
+
 router.get(/^(.*)$/, function(req, res){
     channels.getChannelsList(req, res);
     return res;

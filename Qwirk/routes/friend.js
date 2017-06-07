@@ -9,7 +9,6 @@ router.get(/^\/findFriend\/^(.*)$/, function(req, res){
 });
 */
 
-
 router.post('/addFriend', function(req, res){
 
     frie.AddAFriend(req, res).then(function(result){

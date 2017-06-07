@@ -100,6 +100,39 @@ module.exports = {
           res.json(channelResult);
         })
     });
+  },
+
+  joinChannel: function (req, res) {
+
+    var deferred = Q.defer();
+    var myChannel = req.body.data;
+    var mySelf = req.user.username;
+    var myAvatar = req.user.avatar;
+
+    console.log(myChannel+mySelf+myAvatar)
+
+      this.connectMongo(function (err, db) {
+        var collection = db.collection('users_channels');
+
+            collection.findOne({user: mySelf, channel_name: myChannel})
+              .then(function (result) {
+                  if (null != result){
+                    db.close();
+                    deferred.resolve(false);
+                  }else{
+                    var channelRel = {
+                      "channel_name": myChannel,
+                      "user": mySelf,
+                      "avatar": myAvatar
+                    }
+                    collection.insert(channelRel);
+                    db.close();
+                    deferred.resolve(true);
+                  }
+            });
+        });
+
+      return deferred.promise;
   }
 
 
