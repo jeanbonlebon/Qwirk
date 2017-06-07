@@ -36,9 +36,17 @@ router.get('/:name', index.getMyFriends, index.GetMyGroups, index.GetMyChannels,
 
 });
 
-router.post('/update/:name', function(req, res) {
-    //var result = groups.addGroup(req, res);
-    //res.send();
+router.get('/kick/:name', function(req, res) {
+
+    console.log(req.params.name);
+    groups.kickMember(req, res).then(function(results){
+        if(results){
+            return res.json({status : 300});
+        }else{
+            return res.json({status : 404});
+        }
+    });
+
 });
 
 router.get('/del/:name', index.getMyFriends, index.GetMyGroups, index.GetMyChannels, function(req, res) {

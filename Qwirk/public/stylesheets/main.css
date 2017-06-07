@@ -1,6 +1,7 @@
 html, body{
     min-height:100%;
   	height:100%;
+    overflow:hidden;
 }
 
 .modal{
@@ -407,12 +408,12 @@ label::before {
 
 
 
-#members .row .col{
+#admin_group .row .col{
     float:none;
     display:inline-block;
     vertical-align: middle;
 }
-#members .row .col .del{
+#admin_group .row .col .del{
     text-align: center;
     display: inherit;
     border-radius: 50%;
@@ -421,10 +422,10 @@ label::before {
     height: 50px;
     padding-top: 4px;
 }
-#members .row .col .del a i{
+#admin_group .row .col .del a i{
     font-size: 40px;
     color:#FFF;
 }
-#members .row .col img{
+#admin_group .row .col img{
     width:75%;
 }

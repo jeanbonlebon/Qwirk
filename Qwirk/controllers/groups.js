@@ -98,5 +98,28 @@ module.exports = {
       return deferred.promise;
   },
 
+  kickMember: function (req, res) {
+    Q = require('q');
+    var deferred = Q.defer();
+    var name = req.params.name;
+    console.log(name);
+
+    this.connectMongo(function (err, db) {
+      //var groupCollection = db.collection('groups');
+      var usersGroupCollection = db.collection('users_groups');
+
+          usersGroupCollection.remove({user: name})
+            .then(function (erreur, results) {
+                if (err){
+                  db.close();
+                  deferred.resolve(false);
+                }else{
+                  db.close();
+                  deferred.resolve(true);
+                }
+          });
+      });
+      return deferred.promise;
+  }
 
 };

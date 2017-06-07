@@ -24,6 +24,7 @@ $(function() {
       .done(function( data ) {console.log( data )})
       .fail(function() {alert( "error" )})
   })
+/////////////////// GROUPS ///////////////////////////////
   $('#del_group .modal-footer > a.validate').click(function () {
     var groupNametoDel = $('input#gpname_del').val();
     $.get('/groups/del/'+groupNametoDel, { name: groupNametoDel })
@@ -32,7 +33,20 @@ $(function() {
       })
       .fail(function() {alert( "error" )})
   })
+  $('#admin_group .modal-content a.group_member').click(function () {
+    var group_member = $(this).attr('id');
+    var groupNametoDel = $('input#gpname_del').val();
+    console.log(group_member);
+    console.log(groupNametoDel);
 
+    $.get('/groups/kick/'+group_member, {name: group_member})
+      .done(function( data ) {
+          window.location.href = "/groups/"+groupNametoDel;
+      })
+      .fail(function() {alert( "error" )})
+
+  })
+  /*
   //SocketIO Initiator and Closure
   $('#local-sign-in').submit(function(event){
     var socket = io();
@@ -42,4 +56,5 @@ $(function() {
     var socket = io();
     socket.disconnect();
   });
+  */
 });
