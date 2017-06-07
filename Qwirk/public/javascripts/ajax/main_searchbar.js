@@ -100,7 +100,7 @@ $(function() {
         targetElement.parent('a').hide();
         targetElement.parent('a').next('.preloader').show();
 
-        /*
+        
         $.post('/friend/addFriend', parameters, function(data) {
           }).done(function (data) {
               targetElement.parent('a').next('.preloader').hide();
@@ -111,7 +111,7 @@ $(function() {
               targetElement.parent('a').show();
               console.log('fail !');
           });
-        */
+        
     }
 
     if (channelName !== undefined){

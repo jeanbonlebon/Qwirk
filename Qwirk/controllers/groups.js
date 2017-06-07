@@ -1,5 +1,5 @@
 module.exports = {
-
+  
   connectMongo: function (callback, req, res) {
     var mongodbUrl = 'mongodb://' + config.mongodbHost + ':27017/qwirk';
     var MongoClient = require('mongodb').MongoClient;
@@ -72,8 +72,6 @@ module.exports = {
     return deferred.promise;
   },
 
-
-
   delGroup: function (req, res) {
     Q = require('q');
     var deferred = Q.defer();
@@ -121,5 +119,4 @@ module.exports = {
       });
       return deferred.promise;
   }
-
 };

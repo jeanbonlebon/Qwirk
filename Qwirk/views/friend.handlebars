@@ -1,52 +1,58 @@
 <div class="wrapper">
     <div class="wrap">
-      <section class="friend_infos">
-          {{#each selectedUser}}
-              <img src="/images/{{avatar}}" class="responsive-img">
-              <p>{{username}}</p>
-          {{/each}}
-          <div class="test" hidden>{{user.username}}</div>
+        <section class="friend_infos">
+            {{#each selectedUser}}
+            <img src="/images/{{avatar}}" class="responsive-img">
+            <p>{{username}}</p>
+            {{/each}}
+            <div class="test" hidden>{{user.username}}</div>
 
-          <ul id="messages"></ul>
+            <ul id="messages"></ul>
 
 
-      </section>
-      <section class="console">
 
-          <div class="row send">
-              <div class="col s11">
-                  <input id="m" type="text">
-              </div>
-              <div class="col s1">
-                  <a id="send" href="#"><i class="material-icons">replay</i></a>
-              </div>
-          </div>
+        </section>
 
-      </section>
+        <section id="chat">
+            <ul class="pages">
+                <li class="chat page">
+                    <div class="chatArea">
+                        <style>
+                            video {
+                                height: 250px;
+                                width: 250px;
+                                display: block;
+                            }
+                        </style>
+                        <div style='float:right;'>
+                            <video id="localVideo" autoplay muted></video>
+                            <video id="remoteVideo" autoplay></video>
+                            <input type="button" id="start" onclick="start(true)" value="Start Video"></input>
+                            <input type="button" id="toVideoChat" onclick="pageReady()" value="Video"></input>
+                        </div>
+                        <ul class="messages"></ul>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="console">
+
+            <div class="row send">
+                <div class="col s11">
+                    <input id="m" class="inputMessage" type="text" placeholder="Type here...">
+                </div>
+                <div class="col s1">
+                    <a id="send" href="#"><i class="material-icons">replay</i></a>
+                </div>
+            </div>
+
+        </section>
     </div>
 </div>
-
-<script type="text/javascript">
-
-   $(function () {
-     var socket = io();
-     var user = $('.test').text();
-
-     $('#send').click(function(event){
-       event.preventDefault();
-       socket.emit('84585', $('#m').val(), user);
-       $('#messages').append($('<p style="color:red">').text($('#m').val()));
-       $('#m').val('');
-       return false;
-     });
-
-     socket.on('84585', function(msg){
-        console.log('does this show up multiple times?');
-        $('#messages').append($('<p style="color:blue">').text(user));
-        $('#messages').append($('<li>').text(msg));
-        //window.scrollTo(800, document.body.$('.wrapper').scrollHeight);
-     });
-
-   });
-
-</script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<input id='myusername' type='hidden' value='{{user.username}}' />
+<script src="/javascripts/mainsocketio.js"></script>
+<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+<script src="/javascripts/webrtc.js"></script>

@@ -5,66 +5,74 @@
   {{/each}}
 </label>
 <div class="wrapper">
-  {{#ifCondGrp myself v2}}
-      <div class="nav_admin row">
-          <div class="col s3">
+    {{#ifCondGrp myself v2}}
+    <div class="nav_admin row">
+        <div class="col s3">
 
-          </div>
-          <div class="col s9">
-              <ul class="icon_admingr search">
-                <input type="search" name="search" placeholder="Add Friend to Group" class="typeahead"/>
+        </div>
+        <div class="col s9">
+            <ul class="icon_admingr search">
+                <input type="search" name="search" placeholder="Add Friend to Group" class="typeahead" />
                 <li class="open-search"><a href="#"><i class="material-icons">search</i></a></li>
                 <li><a href="#admin_group"><i class="material-icons">list</i></a></li>
                 <li><a href="#del_group"><i class="material-icons">delete</i></a></li>
-              </ul>
-          </div>
-      </div>
-  {{/ifCondGrp}}
-
-  <script>
-  $('.search').on('click', '.open-search', function() {
-      $('[name="search"]').toggleClass('show')
-  });
-  </script>
-
-  <div class="wrap">
-
-    <section class="friend_infos">
-
-
-    </section>
-    <section class="console">
-
-        <div class="row send">
-            <div class="col s11">
-                <input type="text">
-            </div>
-            <div class="col s1">
-                <a href="#"><i class="material-icons">replay</i></a>
-            </div>
+            </ul>
         </div>
+    </div>
+    {{/ifCondGrp}}
 
-    </section>
-</div>
+    <script>
+        $('.search').on('click', '.open-search', function () {
+            $('[name="search"]').toggleClass('show')
+        });
+    </script>
+
+    <div class="wrap">
+
+        <section class="friend_infos">
+
+            <ul class="pages">
+                <li class="chat page">
+                    <div class="chatArea">
+                        <ul class="messages"></ul>
+                    </div>
+                </li>
+            </ul>
+
+        </section>
+        <section class="console">
+
+            <div class="row send">
+                <div class="col s11">
+                    <input class='inputMessage' type="text" placeholder="Type here...">
+                </div>
+                <div class="col s1">
+                    <a href="#"><i class="material-icons">replay</i></a>
+                </div>
+            </div>
+
+        </section>
+    </div>
 </div>
 
 <!-- Modals -->
+{{!--
 <div id="del_group" class="modal">
-  <div class="modal-content">
-    <h4>Delete this group</h4>
-    <p>Are you sure you want to delete the group {{#each selectedGroup}}{{name}}{{/each}} ?</p>
-    <input id="gpname_del" type="hidden" value="{{#each selectedGroup}}{{name}}{{/each}}">
-  </div>
-  <div class="modal-footer">
-    <a href="#!" class="modal-action waves-effect waves-green btn-flat validate">Yes</a>
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">No</a>
-  </div>
+    <div class="modal-content">
+        <h4>Delete this group</h4>
+        <p>Are you sure you want to delete the group {{#each selectedGroup}}{{name}}{{/each}} ?</p>
+        <input id="gpname_del" type="hidden" value="{{#each selectedGroup}}{{name}}{{/each}}">
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action waves-effect waves-green btn-flat validate">Yes</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">No</a>
+    </div>
 </div>
 
 <div id="admin_group" class="modal bottom-sheet">
-  <div class="modal-content">
-    <h4>Group members</h4>
-    {{#each selectedGroupUsers}}
+    <div class="modal-content">
+        <h4>Group members</h4>
+        {{#each selectedGroupUsers}}
         <div class="row">
             <div class="col s1 offset-s1"><img src="/images/{{avatar}}" class="responsive-img"></div>
             <div class="col s3">{{user}}</div>
@@ -74,6 +82,10 @@
                 </div>
             </div>
         </div>
-    {{/each}}
-  </div>
-</div>
+        {{/each}}
+    </div>
+</div>--}}
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<input id='myusername' type='hidden' value='{{user.username}}'/>
+<script src="/javascripts/mainsocketio.js"></script>
