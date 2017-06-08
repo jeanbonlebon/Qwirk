@@ -494,3 +494,29 @@ ul#tab_profil{
 #conversation .text{
 
 }
+
+section.friend_infos{
+    padding: 85px;
+}
+.console .utilities {
+    margin-bottom: 10px;
+}
+.console .emoji-picker-icon{
+  right: 13.4%;
+  top: 16%;
+}
+
+.console .emoji-picker-icon.parent-has-scroll{
+  right: 13.4% ! important;
+}
+
+.console .emoji-menu{
+  bottom: 120px;
+  left: 60%;
+}
+
+.console .emoji-wysiwyg-editor{
+    overflow: hidden;
+    background-color: #FFF;
+    height: 40px;
+}

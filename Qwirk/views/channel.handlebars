@@ -32,34 +32,39 @@
   </div>
   {{/ifCondChl}}
 
+  <div id="relation" hidden>{{#each selectedChannel}}{{name}}{{/each}}</div>
+  <div id="relation_me" hidden>{{user.username}}</div>
 
   <div class="wrap">
 
-    <section class="friend_infos">
-
-        {{#each selectedChannel}}
-            <p>{{name}}</p>
-        {{/each}}
-        {{#each selectedChannelUsers}}
-            <p>{{user}}</p>
-        {{/each}}
+    <section id="conversation" class="friend_infos">
 
     </section>
     <section class="console">
 
-        <div class="row send">
-            <div class="col s11">
-                <input type="text">
-            </div>
-            <div class="col s1">
-                <a href="#"><i class="material-icons">replay</i></a>
-            </div>
-        </div>
+      <div class="row send">
+          <div class="row utilities">
+              <div class="col s10">
+
+              </div>
+              <div class="col s1"><a href="#"><i class="material-icons">emojis</i></a></div>
+              <div class="col s1"></div>
+          </div>
+          <div class="col s11">
+              <input id="data" type="text" data-emojiable="true">
+          </div>
+          <div class="col s1">
+              <a id="datasend" href="#"><i class="material-icons">replay</i></a>
+          </div>
+      </div>
 
     </section>
 </div>
 </div>
 
+<script src="/socket.io/socket.io.js"></script>
+<script src="/javascripts/socket_front.js"></script>
+<script src="/javascripts/date_utils.js"></script>
 
 <!-- Modals USERS -->
 <div id="quit_channel" class="modal">

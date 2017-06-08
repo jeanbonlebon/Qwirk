@@ -103,6 +103,9 @@ module.exports = {
     var name = req.params.name;
     var channel = req.query.channel;
 
+    console.log(name);
+    console.log(channel);
+
     this.connectMongo(function (err, db) {
       //var groupCollection = db.collection('groups');
       var usersChannelCollection = db.collection('users_channels');

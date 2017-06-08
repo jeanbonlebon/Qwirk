@@ -14,6 +14,18 @@ $(function() {
   $('.tooltipped').tooltip({delay: 50});
 
 
+    // Initializes and creates emoji set from sprite sheet
+    window.emojiPicker = new EmojiPicker({
+      emojiable_selector: '[data-emojiable=true]',
+      assetsPath: '../images/emojis',
+      popupButtonClasses: 'fa fa-smile-o'
+    });
+    // Finds all elements with `emojiable_selector` and converts them to rich emoji input fields
+    // You may want to delay this step if you have dynamically created input fields that appear later in the loading process
+    // It can be called as many times as necessary; previously converted input fields will not be converted again
+    window.emojiPicker.discover();
+
+
   $('.modal-footer > a.group').click(function () {
     var groupName = $('input#group_name').first().val();
     $.post('/groups/add', { name: groupName })
@@ -68,9 +80,8 @@ $('#quit_group .modal-footer > a.validate').click(function () {
   $('#quit_channel .modal-footer > a.validate').click(function () {
     var channelNametoQuit = $('input#chname_quit').val();
     var channelUsertoQuit = $('input#chuser_quit').val();
-    console.log(groupNametoQuit+groupUsertoQuit);
 
-    $.get('/channels/kick/'+channelUsertoQuit, {name: channelNametoQuit, channel: channelUsertoQuit})
+    $.get('/channels/kick/'+channelUsertoQuit, {name: channelUsertoQuit, channel: channelNametoQuit})
       .done(function( data ) {
           window.location.href = "/";
       })
