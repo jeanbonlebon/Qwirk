@@ -3,7 +3,7 @@ module.exports = {
   connectMongo: function (callback, req, res) {
     var mongodbUrl = 'mongodb://' + config.mongodbHost + ':27017/qwirk';
     var MongoClient = require('mongodb').MongoClient;
-  MongoClient.connect(mongodbUrl, callback)
+    MongoClient.connect(mongodbUrl, callback)
   },
 
   addChannel: function (req, res) {
@@ -12,25 +12,32 @@ module.exports = {
     var channelName = req.body.name;
     var username = req.user.username;
     var avatar = req.user.avatar;
+
     this.connectMongo(function (err, db) {
       var channelCollection = db.collection('channels');
       var userschannelCollection = db.collection('users_channels');
       channelCollection.findOne({'name': channelName})
         .then(function (result) {
           if (null != result) {
-            console.log("CHANNELNAME ALREADY EXISTS:", result.name);
+            //var txt_error = result.name, "already exist";
             deferred.resolve(false);
           } else {
-            console.log("CREATING CHANNEL:", channelName);
             channelCollection.insert({name: channelName,admin: username})
-            .then(function () {db.close()});
-            userschannelCollection.insert({channel_name: channelName,user: username,avatar: avatar})
-            .then(function () {db.close()});
-            deferred.resolve(true);
+            .then(function (erreur, results) {
+                if (err){
+                  db.close();
+                  deferred.resolve(false);
+                }else{
+                  userschannelCollection.insert({channel_name: channelName,user: username,avatar: avatar});
+                  db.close();
+                  deferred.resolve(channelName);
+                }
+            });
           }
         return deferred.promise;
-      })
-    });
+        })
+      });
+    return deferred.promise;
   },
 
 
@@ -65,6 +72,54 @@ module.exports = {
     return deferred.promise;
   },
 
+  delChannel: function (req, res) {
+    Q = require('q');
+    var deferred = Q.defer();
+    var name = req.params.name;
+
+    this.connectMongo(function (err, db) {
+      var channelCollection = db.collection('channels');
+      var usersChannelCollection = db.collection('users_channels');
+
+          channelCollection.remove({name: name})
+            .then(function (erreur, results) {
+                if (err){
+                  db.close();
+                  deferred.resolve(false);
+                }else{
+                  usersChannelCollection.remove({channel_name: name});
+                  db.close();
+                  deferred.resolve(true);
+                }
+          });
+      });
+      return deferred.promise;
+  },
+
+
+  kickMember: function (req, res) {
+    Q = require('q');
+    var deferred = Q.defer();
+    var name = req.params.name;
+    var channel = req.query.channel;
+
+    this.connectMongo(function (err, db) {
+      //var groupCollection = db.collection('groups');
+      var usersChannelCollection = db.collection('users_channels');
+
+          usersChannelCollection.remove({user: name, channel_name: channel})
+            .then(function (erreur, results) {
+                if (err){
+                  db.close();
+                  deferred.resolve(false);
+                }else{
+                  db.close();
+                  deferred.resolve(true);
+                }
+          });
+      });
+      return deferred.promise;
+  },
 
   getChannelsList: function (req, res) {
 

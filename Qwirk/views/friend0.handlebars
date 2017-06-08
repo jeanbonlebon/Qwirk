@@ -1,0 +1,54 @@
+<div class="wrapper">
+    <div class="wrap">
+      <section class="friend_infos">
+          {{#each selectedUser}}
+              <img src="/images/{{avatar}}" class="responsive-img">
+              <p>{{username}}</p>
+          {{/each}}
+          <div class="test" hidden>{{user.username}}</div>
+
+          <ul id="messages"></ul>
+
+
+      </section>
+      <section class="console">
+
+          <div class="row send">
+              <div class="col s11">
+                  <input id="m" type="text">
+              </div>
+              <div class="col s1">
+                  <a id="send" href="#"><i class="material-icons">replay</i></a>
+              </div>
+          </div>
+
+      </section>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+   $(function () {
+     var socket = io();
+     var user = $('.test').text();
+
+     $('#send').click(function(event){
+       event.preventDefault();
+       socket.emit('84585', $('#m').val(), user);
+       $('#messages').append($('<p style="color:red">').text($('#m').val()));
+       $('#m').val('');
+       return false;
+     });
+
+    /*
+     socket.on('84585', function(msg){
+        console.log('does this show up multiple times?');
+        $('#messages').append($('<p style="color:blue">').text(user));
+        $('#messages').append($('<li>').text(msg));
+        //window.scrollTo(800, document.body.$('.wrapper').scrollHeight);
+     });
+     */
+
+   });
+
+</script>

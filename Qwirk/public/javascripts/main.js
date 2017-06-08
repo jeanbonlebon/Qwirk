@@ -10,7 +10,7 @@ $(function() {
 
   $('.modal').modal();
 
-  //Tooltip for group users
+  //Tooltip for group / channel users
   $('.tooltipped').tooltip({delay: 50});
 
 
@@ -26,7 +26,7 @@ $(function() {
     var channelName = $('input#channel_name').first().val();
     $.post('/channels/add', { name: channelName })
       .done(function( data ) {
-          //window.location.href = "/channels/"+data.group;
+          window.location.href = "/channels/"+data.channel;
       })
       .fail(function() {alert( "error" )})
   })
@@ -62,6 +62,40 @@ $('#quit_group .modal-footer > a.validate').click(function () {
       .fail(function() {alert( "error" )})
 
   })
+
+
+  /////////////////// CHANNELS ///////////////////////////////
+  $('#quit_channel .modal-footer > a.validate').click(function () {
+    var channelNametoQuit = $('input#chname_quit').val();
+    var channelUsertoQuit = $('input#chuser_quit').val();
+    console.log(groupNametoQuit+groupUsertoQuit);
+
+    $.get('/channels/kick/'+channelUsertoQuit, {name: channelNametoQuit, channel: channelUsertoQuit})
+      .done(function( data ) {
+          window.location.href = "/";
+      })
+      .fail(function() {alert( "error" )})
+
+  })
+    $('#del_channel .modal-footer > a.validate').click(function () {
+      var channelNametoDel = $('input#chname_del').val();
+      $.get('/channels/del/'+channelNametoDel, { name: channelNametoDel })
+        .done(function( data ) {
+            window.location.href = "/";
+        })
+        .fail(function() {alert( "error" )})
+    })
+    $('#admin_channel .modal-content a.channel_member').click(function () {
+      var channel_member = $(this).attr('id');
+      var channelNametoDel = $('input#chname_del').val();
+
+      $.get('/channels/kick/'+channel_member, {name: channel_member, channel: channelNametoDel})
+        .done(function( data ) {
+            window.location.href = "/channels/"+channelNametoDel;
+        })
+        .fail(function() {alert( "error" )})
+
+    })
 
   //SocketIO Initiator and Closure
   $('#local-sign-in').submit(function(event){

@@ -63,21 +63,31 @@ module.exports = {
     Q = require('q');
     var deferred = Q.defer();
     var username = req.params.username;
+    var myself = req.user.username;
 
     this.connectMongo(function (err, db) {
       var collection = db.collection('users');
+      var collection_frie = db.collection('users_relation');
 
       collection.find({'username': username})
         .toArray(function (err, results) {
           if (err) {
-            deferred.resolve(false);
-          } else {
             db.close();
-            res.selectedUser = results;
-            deferred.resolve(true);
-            return res.selectedUser;
-          }
-      })
+            deferred.resolve(false);
+            }
+          res.selectedUser = results;
+          collection_frie.find({'friend1': username, 'friend2': myself})
+            .toArray(function (err, results2) {
+              if (err) {
+                  db.close();
+                  deferred.resolve(false);
+              }
+              res.selectedRelation = results2;
+              db.close();
+              deferred.resolve(true);
+              return res
+            })
+        })
     });
     return deferred.promise;
   }

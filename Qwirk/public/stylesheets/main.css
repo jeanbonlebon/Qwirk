@@ -4,10 +4,6 @@ html, body{
     overflow:hidden;
 }
 
-.modal{
-    display:block;
-    z-index:999;
-}
 body{
   	margin:0;
 }
@@ -415,12 +411,12 @@ label::before {
 }
 
 
-#admin_group .row .col{
+.modal.bottom-sheet .row .col{
     float:none;
     display:inline-block;
     vertical-align: middle;
 }
-#admin_group .row .col .del{
+.modal.bottom-sheet .row .col .del{
     text-align: center;
     display: inherit;
     border-radius: 50%;
@@ -429,11 +425,11 @@ label::before {
     height: 50px;
     padding-top: 4px;
 }
-#admin_group .row .col .del a i{
+.modal.bottom-sheet .row .col .del a i{
     font-size: 40px;
     color:#FFF;
 }
-#admin_group .row .col img{
+.modal.bottom-sheet .row .col img{
     width:75%;
 }
 #adminBar .tt-menu{
@@ -456,4 +452,45 @@ label::before {
 /******************* MYPROFIL ***********************/
 ul#tab_profil{
     overflow:hidden;
+}
+
+
+/******************** CHAT SOCKET IO ***************/
+#conversation img{
+    width:50px;
+}
+#conversation .receive{
+    text-align: left;
+}
+#conversation .receive .text{
+    display: inline-block;
+    padding: 5px 10px;
+    vertical-align: top;
+    margin-top: 9px;
+    background-color: #e1bee7;
+    color: #000;
+    margin-left: 20px;
+}
+#conversation .receive span{
+    display: block;
+    margin-left: 76px;
+    margin-top: -10px;
+    font-size: 13px;
+}
+#conversation .sender{
+    text-align: right;
+}
+#conversation .sender .text{
+    display: inline-block;
+    background-color: rebeccapurple;
+    color: #FFF;
+    padding: 5px 10px;
+}
+#conversation .sender span{
+  display: block;
+  margin-top: 5px;
+  font-size: 13px;
+}
+#conversation .text{
+
 }

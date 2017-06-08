@@ -9,7 +9,6 @@ var express = require('express'),
     LocalStrategy = require('passport-local'),
     path = require('path'),
     favicon = require('serve-favicon'),
-    logger = require('morgan'),
     stylus = require('stylus');
 
 var config = require('./config.js'),
@@ -64,7 +63,7 @@ app.set('view engine', 'handlebars');
 
 //===============EXPRESS================
 // Configure Express
-app.use(logger('combined'));
+//app.use(logger('combined'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -94,23 +93,34 @@ app.use(function (req, res, next) {
     if (msg) res.locals.notice = msg;
     if (success) res.locals.success = success;
 
+
+    /* Socket IO  set new clients in array */ /*
     if (req.user){
-      /* Socket IO  set new clients in array */
-      Array.prototype.contains = function(obj) {
-          var i = this.length;
-          while (i--) {
-              if (this[i] == obj) {
-                  return true;
-              }
-          }
-          return false;
+
+      var array = [];
+      //Get the username in socket_username array
+      for (let item of sockets_usernames) {
+          array.push(Object.keys(item)[0])
       }
 
-      if (sockets_usernames.contains(req.user.username)){
-      }else{
-          sockets_usernames.push(req.user.username)
+      //Check if username is already define in array
+      if(!(array.includes(req.user.username))){
+
+          //Get the last object of array
+          var val = sockets_usernames[sockets_usernames.length - 1];
+          //redifine new name for key with username
+          if ("foo" !== req.user.username) {
+              Object.defineProperty(val, req.user.username,
+                  Object.getOwnPropertyDescriptor(val, "foo"));
+                  console.log('55555555555555555555555555555555555555555'+val+'5555555555555555555555')
+              delete val["foo"];
+          }
+
       }
+
     }
+    */
+
     console.log('/////////////////////////////');
     console.log(sockets_usernames);
     console.log('/////////////////////////////');
@@ -138,16 +148,8 @@ var server = app.listen(port);
 var sockets_usernames = [];
 
 var io = require('socket.io')(server);
-require('./controllers/socket_io')(io);
 
-/*
-app.io = io;
-
-console.log('////////////////////////////////////////////////');
-console.log(req.app.io);
-console.log('////////////////////////////////////////////////');
-var io = req.app.io;
-*/
+require('./controllers/socket_io')(io, sockets_usernames);
 
 console.log("listening on " + port + "!");
 

@@ -34,6 +34,9 @@
   </div>
   {{/ifCondGrp}}
 
+  <div id="relation" hidden>{{#each selectedGroup}}{{name}}{{/each}}</div>
+  <div id="relation_me" hidden>{{user.username}}</div>
+
   <script>
   $('.search').on('click', '.open-search', function() {
       $('[name="search"]').toggleClass('show')
@@ -48,18 +51,22 @@
     </section>
     <section class="console">
 
-        <div class="row send">
-            <div class="col s11">
-                <input type="text">
-            </div>
-            <div class="col s1">
-                <a href="#"><i class="material-icons">replay</i></a>
-            </div>
-        </div>
+      <div class="row send">
+          <div class="col s11">
+              <input id="data" type="text">
+          </div>
+          <div class="col s1">
+              <a id="datasend" href="#"><i class="material-icons">replay</i></a>
+          </div>
+      </div>
 
     </section>
 </div>
 </div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/javascripts/socket_front.js"></script>
+<script src="/javascripts/date_utils.js"></script>
 
 <!-- Modals USERS -->
 <div id="quit_group" class="modal">

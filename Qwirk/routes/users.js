@@ -17,6 +17,7 @@ router.get('/:username',index.getMyFriends, index.GetMyGroups, index.GetMyChanne
             //return res.jqXHR({status : 404});
             //return res.json({selectedUser: res.selectedUser});
             res.render('friend', {
+              selectedRelation : res.selectedRelation,
               selectedUser: res.selectedUser,
               user: req.user,
               friends: req.friend,

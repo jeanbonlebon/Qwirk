@@ -64,6 +64,7 @@ exports.AddAFriend = function (req, res) {
             "friend1_username": "",
             "friend2_username": "",
             "blocked": "",
+            "relation": myFriend+mySelf,
           }
           var friendRel2 = {
             "friend1": myFriend,
@@ -71,6 +72,7 @@ exports.AddAFriend = function (req, res) {
             "friend1_username": "",
             "friend2_username": "",
             "blocked": "",
+            "relation": myFriend+mySelf,
           }
           collection.insert(friendRel)
           .then(function () {db.close()});
