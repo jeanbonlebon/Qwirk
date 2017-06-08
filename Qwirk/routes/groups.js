@@ -15,6 +15,19 @@ router.post('/add', function(req, res, next) {
 
 });
 
+router.post('/addFriend', function(req, res){
+
+    groups.AddAFriendtoGroup(req, res).then(function(result){
+        if(result){
+            console.log(true);
+            return res.json({success : "Updated Successfully", status : 200});
+        }else{
+            console.log(false);
+            return res.json({success : "Failure", status : 404});
+        }
+    })
+});
+
 router.get('/:name', index.getMyFriends, index.GetMyGroups, index.GetMyChannels, function(req, res) {
 
     groups.getGroup(req, res).then(function(results){
@@ -38,7 +51,6 @@ router.get('/:name', index.getMyFriends, index.GetMyGroups, index.GetMyChannels,
 
 router.get('/kick/:name', function(req, res) {
 
-    console.log(req.params.name);
     groups.kickMember(req, res).then(function(results){
         if(results){
             return res.json({status : 300});

@@ -1,0 +1,27 @@
+<div class="wrapper">
+    <div class="wrap">
+    <h4>My Profile</h4>
+    <div class="row">
+      <div class="col s12">
+         <ul id="tab_profil" class="tabs">
+           <li class="tab col s6"><a class="active" href="#test1">Informations</a></li>
+           <li class="tab col s6"><a href="#test2">Friends</a></li>
+         </ul>
+       </div>
+       <div id="test1" class="col s12">
+       </div>
+       <div id="test2" class="col s12">
+         {{#each friends}}
+             <p>{{friend2}}</p>
+         {{/each}}
+       </div>
+     </div>
+
+</div>
+</div>
+<script>
+$(function() {
+    //Tabs System My profile
+    $('#tab_profil').tabs();
+});
+</script>

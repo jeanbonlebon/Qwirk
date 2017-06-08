@@ -9,7 +9,6 @@ var express = require('express'),
     LocalStrategy = require('passport-local'),
     path = require('path'),
     favicon = require('serve-favicon'),
-    logger = require('morgan'),
     stylus = require('stylus');
 
 var config = require('./config.js'),
@@ -64,7 +63,7 @@ app.set('view engine', 'handlebars');
 
 //===============EXPRESS================
 // Configure Express
-app.use(logger('combined'));
+//app.use(logger('combined'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -94,6 +93,34 @@ app.use(function (req, res, next) {
     if (msg) res.locals.notice = msg;
     if (success) res.locals.success = success;
 
+
+    /* Socket IO  set new clients in array */ /*
+    if (req.user){
+
+      var array = [];
+      //Get the username in socket_username array
+      for (let item of sockets_usernames) {
+          array.push(Object.keys(item)[0])
+      }
+
+      //Check if username is already define in array
+      if(!(array.includes(req.user.username))){
+
+          //Get the last object of array
+          var val = sockets_usernames[sockets_usernames.length - 1];
+          //redifine new name for key with username
+          if ("foo" !== req.user.username) {
+              Object.defineProperty(val, req.user.username,
+                  Object.getOwnPropertyDescriptor(val, "foo"));
+                  console.log('55555555555555555555555555555555555555555'+val+'5555555555555555555555')
+              delete val["foo"];
+          }
+
+      }
+
+    }
+    */
+
     next();
 });
 
@@ -114,44 +141,10 @@ var server = app.listen(port);
 
 //app.listen(port);
 
+var sockets_usernames = [];
+
 var io = require('socket.io')(server);
-app.io = io;
 
-console.log("listening on " + port + "!");
+require('./controllers/socket_io')(io, sockets_usernames);
 
-
-/*
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(stylus.middleware(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', index);
-app.use('/users', users);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-*/
+console.log("here we go on " + port + "!");

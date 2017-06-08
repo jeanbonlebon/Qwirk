@@ -11,7 +11,7 @@
 
           </div>
           <div class="col s9">
-              <ul class="icon_admingr search">
+              <ul id="adminBar" class="icon_admingr search">
                 <input type="search" name="search" placeholder="Add Friend to Group" class="typeahead"/>
                 <li class="open-search"><a href="#"><i class="material-icons">search</i></a></li>
                 <li><a href="#admin_group"><i class="material-icons">list</i></a></li>
@@ -19,7 +19,23 @@
               </ul>
           </div>
       </div>
+  {{else}}
+  <div class="nav_admin row">
+      <div class="col s6 offset-s4 users_in_group">
+          {{#each selectedGroupUsers}}
+              <img src="/images/{{avatar}}" class="responsive-img tooltipped" data-position="bottom" data-delay="50" data-tooltip="{{user}}">
+          {{/each}}
+      </div>
+      <div class="col s2">
+          <ul id="adminBar" class="icon_admingr search">
+            <li><a href="#quit_group" alt="Quit the group?"><i class="material-icons">delete</i></a></li>
+          </ul>
+      </div>
+  </div>
   {{/ifCondGrp}}
+
+  <div id="relation" hidden>{{#each selectedGroup}}{{name}}{{/each}}</div>
+  <div id="relation_me" hidden>{{user.username}}</div>
 
   <script>
   $('.search').on('click', '.open-search', function() {
@@ -29,30 +45,55 @@
 
   <div class="wrap">
 
-    <section class="friend_infos">
+    <section id="conversation" class="friend_infos">
 
 
     </section>
     <section class="console">
 
-        <div class="row send">
-            <div class="col s11">
-                <input type="text">
-            </div>
-            <div class="col s1">
-                <a href="#"><i class="material-icons">replay</i></a>
-            </div>
-        </div>
+      <div class="row send">
+          <div class="row utilities">
+              <div class="col s10">
+
+              </div>
+              <div class="col s1"><a href="#"><i class="material-icons">emojis</i></a></div>
+              <div class="col s1"></div>
+          </div>
+          <div class="col s11">
+              <input id="data" type="text" data-emojiable="true">
+          </div>
+          <div class="col s1">
+              <a id="datasend" href="#"><i class="material-icons">replay</i></a>
+          </div>
+      </div>
 
     </section>
 </div>
 </div>
 
-<!-- Modals -->
+<script src="/socket.io/socket.io.js"></script>
+<script src="/javascripts/socket_front.js"></script>
+<script src="/javascripts/date_utils.js"></script>
+
+<!-- Modals USERS -->
+<div id="quit_group" class="modal">
+  <div class="modal-content">
+    <h4>Quit this group</h4>
+    <p>Are you sure you want to quit this group : {{#each selectedGroup}}{{name}}{{/each}} ?</p>
+    <input id="gpname_quit" type="hidden" value="{{#each selectedGroup}}{{name}}{{/each}}">
+    <input id="guser_quit" type="hidden" value="{{myself}}">
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action waves-effect waves-green btn-flat validate">Yes</a>
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">No</a>
+  </div>
+</div>
+
+<!-- Modals ADMIN -->
 <div id="del_group" class="modal">
   <div class="modal-content">
     <h4>Delete this group</h4>
-    <p>Are you sure you want to delete the group {{#each selectedGroup}}{{name}}{{/each}} ?</p>
+    <p>Are you sure you want to delete the group : {{#each selectedGroup}}{{name}}{{/each}} ?</p>
     <input id="gpname_del" type="hidden" value="{{#each selectedGroup}}{{name}}{{/each}}">
   </div>
   <div class="modal-footer">

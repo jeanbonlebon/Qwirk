@@ -4,10 +4,6 @@ html, body{
     overflow:hidden;
 }
 
-.modal{
-    display:block;
-    z-index:999;
-}
 body{
   	margin:0;
 }
@@ -406,14 +402,21 @@ label::before {
   width: 16rem;
 }
 
+.nav_admin .users_in_group img{
+    margin-top: 5px;
+    width: 55px;
+    height: 55px;
+    display: inline-block;
+    margin-left: 10px;
+}
 
 
-#admin_group .row .col{
+.modal.bottom-sheet .row .col{
     float:none;
     display:inline-block;
     vertical-align: middle;
 }
-#admin_group .row .col .del{
+.modal.bottom-sheet .row .col .del{
     text-align: center;
     display: inherit;
     border-radius: 50%;
@@ -422,10 +425,98 @@ label::before {
     height: 50px;
     padding-top: 4px;
 }
-#admin_group .row .col .del a i{
+.modal.bottom-sheet .row .col .del a i{
     font-size: 40px;
     color:#FFF;
 }
-#admin_group .row .col img{
+.modal.bottom-sheet .row .col img{
     width:75%;
+}
+#adminBar .tt-menu{
+    width:100%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+#adminBar .tt-menu .tt-suggestion{
+    text-align:left;
+}
+#adminBar .tt-menu .tt-suggestion .pluss{
+    top:6px;
+}
+
+
+/******************* MYPROFIL ***********************/
+ul#tab_profil{
+    overflow:hidden;
+}
+
+
+/******************** CHAT SOCKET IO ***************/
+#conversation img{
+    width:50px;
+}
+#conversation .receive{
+    text-align: left;
+}
+#conversation .receive .text{
+    display: inline-block;
+    padding: 5px 10px;
+    vertical-align: top;
+    margin-top: 9px;
+    background-color: #e1bee7;
+    color: #000;
+    margin-left: 20px;
+}
+#conversation .receive span{
+    display: block;
+    margin-left: 76px;
+    margin-top: -10px;
+    font-size: 13px;
+}
+#conversation .sender{
+    text-align: right;
+}
+#conversation .sender .text{
+    display: inline-block;
+    background-color: rebeccapurple;
+    color: #FFF;
+    padding: 5px 10px;
+}
+#conversation .sender span{
+  display: block;
+  margin-top: 5px;
+  font-size: 13px;
+}
+#conversation .text{
+
+}
+
+section.friend_infos{
+    padding: 85px;
+}
+.console .utilities {
+    margin-bottom: 10px;
+}
+.console .emoji-picker-icon{
+  right: 13.4%;
+  top: 16%;
+}
+
+.console .emoji-picker-icon.parent-has-scroll{
+  right: 13.4% ! important;
+}
+
+.console .emoji-menu{
+  bottom: 120px;
+  left: 60%;
+}
+
+.console .emoji-wysiwyg-editor{
+    overflow: hidden;
+    background-color: #FFF;
+    height: 40px;
 }

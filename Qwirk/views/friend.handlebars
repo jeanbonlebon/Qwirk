@@ -1,24 +1,33 @@
-<div class="wrapper">
+<div class="wrapper" style="overflow-y: scroll; height:100%;">
     <div class="wrap">
-      <section class="friend_infos">
+      <section id="conversation" class="friend_infos">
           {{#each selectedUser}}
               <img src="/images/{{avatar}}" class="responsive-img">
-              <p>{{username}}</p>
+              <p class="username">{{username}}</p>
           {{/each}}
-          <div class="test" hidden>{{user.username}}</div>
 
-          <ul id="messages"></ul>
+          <div class="test" hidden>{{user.username}}</div>
+          <div id="relation" hidden>{{#each selectedRelation}}{{relation}}{{/each}}</div>
+          <div id="relation_me" hidden>{{user.username}}</div>
+
 
 
       </section>
       <section class="console">
 
           <div class="row send">
+              <div class="row utilities">
+                  <div class="col s10">
+
+                  </div>
+                  <div class="col s1"><a href="#"><i class="material-icons">emojis</i></a></div>
+                  <div class="col s1"></div>
+              </div>
               <div class="col s11">
-                  <input id="m" type="text">
+                  <input id="data" type="text" data-emojiable="true">
               </div>
               <div class="col s1">
-                  <a id="send" href="#"><i class="material-icons">replay</i></a>
+                  <a id="datasend" href="#"><i class="material-icons">replay</i></a>
               </div>
           </div>
 
@@ -26,27 +35,6 @@
     </div>
 </div>
 
-<script type="text/javascript">
-
-   $(function () {
-     var socket = io();
-     var user = $('.test').text();
-
-     $('#send').click(function(event){
-       event.preventDefault();
-       socket.emit('84585', $('#m').val(), user);
-       $('#messages').append($('<p style="color:red">').text($('#m').val()));
-       $('#m').val('');
-       return false;
-     });
-
-     socket.on('84585', function(msg){
-        console.log('does this show up multiple times?');
-        $('#messages').append($('<p style="color:blue">').text(user));
-        $('#messages').append($('<li>').text(msg));
-        //window.scrollTo(800, document.body.$('.wrapper').scrollHeight);
-     });
-
-   });
-
-</script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/javascripts/socket_front.js"></script>
+<script src="/javascripts/date_utils.js"></script>

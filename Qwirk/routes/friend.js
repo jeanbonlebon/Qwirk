@@ -8,10 +8,6 @@ router.get(/^\/findFriend\/^(.*)$/, function(req, res){
         return res;
 });
 */
-router.get(/^(.*)$/, function(req, res){
-    frie.getFriendList(req, res);
-    return res;
-});
 
 router.post('/addFriend', function(req, res){
 
@@ -24,6 +20,12 @@ router.post('/addFriend', function(req, res){
             return res.json({success : "Failure", status : 404});
         }
     })
+});
+
+
+router.get(/^(.*)$/, function(req, res){
+    frie.getFriendList(req, res);
+    return res;
 });
 
 module.exports = router;
