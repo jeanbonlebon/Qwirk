@@ -48,7 +48,11 @@ $(function () {
         message: message
       });
       // tell server to execute 'new message' and send along one parameter
-      socket.emit('new message', message);
+      if ($('#user').text()) socket.emit('new message', {
+        message,
+        target: $('#user').text()
+      });
+      else socket.emit('new message');
     }
   }
 
@@ -138,7 +142,10 @@ $(function () {
     if (connected) {
       if (!typing) {
         typing = true;
-        socket.emit('typing');
+        if ($('#user')) socket.emit('typing', {
+          target: $('#user').text()
+        });
+        else socket.emit('typing');
       }
       lastTypingTime = (new Date()).getTime();
 
@@ -185,7 +192,7 @@ $(function () {
         sendMessage();
         socket.emit('stop typing');
         typing = false;
-      } 
+      }
     }
   });
 
