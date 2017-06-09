@@ -1,22 +1,23 @@
 # Qwirk
-Real Time Communication App
+Real-time communication app
 
-Qwirk is a real time communication WebApp using NodeJs and Express.
+Qwirk is a real-time communication WebApp powered by Node.js and Express.
 
-You can discuss with your's friends, just the two of you or in groups.
+You can discuss with your friends, just the two of you or in groups.
 Managing your relations is no big deal with our great UI interface.
 
-How to use it ?
+## How to use it ?
 
-Open your gitBash and clone the repository with the following command :
-git clone git@github.com:jeanbonlebon/Qwirk.git
+Open your gitBash and clone the repository with the following command :  
+git clone git@github.com:jeanbonlebon/Qwirk.git (SSH)  
+git clone https://github.com/jeanbonlebon/Qwirk.git (HTTPS)
 
-Once it's done, open your NodeJs Command Prompt and find the path were the project was cloned
+Find the path were the project was cloned, and open it with cmd.exe or the Node.js command prompt
 
-Then, install the packages with : npm install
-Once done, install the BowerComponement with : bower install
+Install the packages with **npm install**  
+Install the BowerComponement with **bower install**
 
 You can use Qwirk now !
-Just run : node app.js
+Just type **node app.js** in prompt to launch it.
 
-And i'll see you at localhost:5050 !!
+And I'll see you at localhost:5050 !!
