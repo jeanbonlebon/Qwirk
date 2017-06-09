@@ -42,6 +42,20 @@ $(function() {
       })
       .fail(function() {alert( "error" )})
   })
+
+  $('.delfriend').click(function () {
+      var friendtoDel = $(this).attr('id');
+      $('.modal_del_friend').modal('open');
+      $('.modal-footer > a.validate').click(function () {
+
+        $.get('/friend/del/'+friendtoDel, {name: friendtoDel})
+          .done(function( data ) {
+              window.location.href = "/";
+          })
+          .fail(function() {alert( "error" )})
+
+      });
+  });
 /////////////////// GROUPS ///////////////////////////////
 $('#quit_group .modal-footer > a.validate').click(function () {
   var groupNametoQuit = $('input#gpname_quit').val();

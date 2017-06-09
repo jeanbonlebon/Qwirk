@@ -4,7 +4,10 @@
     </section>
     <ul id="friendList" class="row">
         {{#each friends}}
-            <li><a href="/users/{{friend2}}">{{friend2}}</a></li>
+            <li>
+              <a href="/users/{{friend2}}">{{friend2}}</a>
+              <a href="#" class="delfriend" id="{{friend2}}"><i class="fa fa-times" aria-hidden="true"></i></a>
+            </li>
         {{/each}}
     </ul>
 

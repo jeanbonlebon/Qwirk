@@ -22,17 +22,21 @@ header{
 .bg_home{
 		width: 100vw;
 		height: 100vh;
-		background: url(../img/bg_main.png) no-repeat center center fixed;
+		background: url(../images/bg_main.jpg) no-repeat center center fixed;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
 		background-size: cover;
 }
 
+.main_title{
+    background-color: transparent;
+}
+
 form.main_form{
 		position: absolute;
     width: 50%;
-    background-color: white;
+    background-color: rgba(255,255,255,0.9);
     padding: 20px;
     border-radius: 5px;
     top: 50%;
@@ -219,6 +223,7 @@ body #ContactNav ul{
 }
 
 body #ContactNav ul li{
+    position:relative;
     display:block;
     width:100%;
     line-height: 50px;
@@ -233,7 +238,18 @@ body #ContactNav ul li:last-child{
 body #ContactNav ul li a{
     color: #000;
 }
-
+body #ContactNav ul li a.delfriend{
+    position: absolute;
+    height: 50px;
+    top: 0;
+    right: 0;
+}
+body #ContactNav ul li a.delfriend i{
+    font-size: 22px;
+    margin-top: 13px;
+    display: block;
+    color: #FFF;
+}
 #playground{
     height:100%;
     padding:0;
@@ -519,4 +535,20 @@ section.friend_infos{
     overflow: hidden;
     background-color: #FFF;
     height: 40px;
+}
+
+.console i.letters{
+  font-size: 26px !important;
+  color: #000 !important;
+  margin-left: 15px !important;
+}
+.console u.letters{
+  font-size: 25px;
+  color: #000;
+  margin-left: 12px;
+}
+.console b.letters{
+  font-size: 26px;
+  color: #000;
+  margin-left: 12px;
 }

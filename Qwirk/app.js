@@ -63,7 +63,7 @@ app.set('view engine', 'handlebars');
 
 //===============EXPRESS================
 // Configure Express
-//app.use(logger('combined'));
+app.use(logger('combined'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -73,11 +73,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
-/*
-app.use(stylus.middleware(path.join(__dirname, '/public')));
-app.use(express.static(path.join(__dirname, '/public')));
-*/
-//app.use(express.static('public/'));
 
 // Session-persisted message middleware
 app.use(function (req, res, next) {

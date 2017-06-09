@@ -134,11 +134,11 @@ $(function() {
           }).done(function (data) {
               targetElement.parent('a').next('.preloader').hide();
               targetElement.parent('a').next('.preloader').next('.check').show();
-              console.log('done !');
+              window.location.href = "/users/"+parameters.data;
           }).fail(function (jqXHR, textStatus) {
               targetElement.parent('a').next('.preloader').hide();
               targetElement.parent('a').show();
-              console.log('fail !');
+              window.location.href = "/";
           });
 
     }
@@ -155,10 +155,11 @@ $(function() {
               targetElement.parent('a').next('.preloader').hide();
               targetElement.parent('a').next('.preloader').next('.check').show();
               console.log('done !');
+              window.location.href = "/channels/"+parameters.data;
           }).fail(function (jqXHR, textStatus) {
               targetElement.parent('a').next('.preloader').hide();
               targetElement.parent('a').show();
-              console.log('fail !');
+              window.location.href = "/";
           });
     }
 
@@ -177,7 +178,6 @@ $(function() {
           }).fail(function (jqXHR, textStatus) {
               targetElement.parent('a').next('.preloader').hide();
               targetElement.parent('a').show();
-              console.log('done !');
               //window.location.href = "/groups/"+parameters.nameGroup;
           });
 

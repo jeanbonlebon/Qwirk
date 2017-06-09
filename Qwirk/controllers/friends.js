@@ -86,3 +86,28 @@ exports.AddAFriend = function (req, res) {
   //console.log(deferred.promise);
   return deferred.promise;
 }
+
+exports.DelAFriend = function (req, res) {
+
+  var deferred = Q.defer();
+  var mySelf = req.user.username;
+  var myFriend = req.query.name;
+
+
+  MongoClient.connect(mongodbUrl, function (err, db) {
+  var collection = db.collection('users_relation');
+
+  collection.remove({"friend1": mySelf,"friend2": myFriend})
+    .then(function (erreur, results) {
+        if (err){
+          db.close();
+          deferred.resolve(false);
+        }else{
+          collection.remove({"friend1": myFriend ,"friend2": mySelf});
+          db.close();
+          deferred.resolve(true);
+        }
+    });
+  });
+  return deferred.promise;
+}
