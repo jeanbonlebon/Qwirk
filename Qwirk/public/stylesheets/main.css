@@ -22,7 +22,7 @@ header{
 .bg_home{
 		width: 100vw;
 		height: 100vh;
-		background: url(../images/bg_main.jpg) no-repeat center center fixed;
+		/*background: url(../images/bg_main.jpg) no-repeat center center fixed;*/
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
@@ -33,17 +33,69 @@ header{
     background-color: transparent;
 }
 
-form.main_form{
-		position: absolute;
-    width: 50%;
-    background-color: rgba(255,255,255,0.9);
-    padding: 20px;
-    border-radius: 5px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.logger_wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:140px;
 }
-
+.logger_wrap .tabs{
+    background-color: #BA68C8;
+}
+.logger_wrap .tabs .tab a{
+    color: #FFF;
+}
+.logger_wrap .tabs .tab a:hover, .logger_wrap .tabs .tab a.active{
+    background-color: #8E24AA;
+    color: #FFF;
+}
+.logger_wrap .tabs .indicator{
+    background-color: #FFF;
+}
+.logger_wrap .container-fluid{
+    background-color: #BA68C8;
+}
+.logger_wrap .row{
+    margin-bottom:0;
+    width: 430px;
+}
+.logger_wrap .nav_pils{
+    padding: 0;
+}
+.logger_wrap form #output{
+    width:80px;
+    height:80px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
+.logger_wrap form label.avatar{
+    text-align: left;
+    margin-bottom: 15px;
+    display: block;
+    margin-top: 15px;
+}
+.logger_wrap form .avatar_btn{
+    margin-top:15px;
+}
+.logger_wrap form.active{
+    background-color: #8E24AA;
+}
+.logger_wrap form label{
+    color: #FFF;
+}
+.logger_wrap form input{
+    color: #FFF;
+}
+.logger_wrap form input:focus{
+    border-bottom: 1px solid rgb(255, 255, 255) !important;
+    box-shadow: 0 1px 0 0 #FFF !important;
+}
+.logger_wrap form .btn{
+    color:#000;
+    background-color: #FFF;
+    margin-bottom: 15px;
+}
 p.alert{
     margin: 0;
     padding: 15px 0;
@@ -305,14 +357,16 @@ body #ContactNav ul li a.delfriend i{
     background-color: #f3e5f5;
     transition: top 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
     box-sizing: border-box;
-    position: absolute;
-    top: -64px;
-    left: 0;
-    width: 100%;
+    position: fixed;
+    top: 0px;
+    right: 0;
+    width: 75%;
     height: 64px;
     z-index:9;
 }
-
+.open_admin_nav{
+    top:64px;
+}
 #toggle {
     position:absolute;
     cursor:pointer;
@@ -348,12 +402,7 @@ label::before {
 }
 
 #toggle:checked ~ .nav_admin {
-    top: 0;
     z-index:9;
-}
-
-#toggle:checked ~ .wrapper {
-    margin-top: 64px;
 }
 
 #toggle:checked + label {
@@ -495,6 +544,7 @@ ul#tab_profil{
 }
 #conversation .sender{
     text-align: right;
+    margin:12px 0;
 }
 #conversation .sender .text{
     display: inline-block;

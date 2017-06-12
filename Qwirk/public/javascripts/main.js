@@ -8,11 +8,14 @@ $(function() {
     }
   );
 
+  $('#group_n').click(function(){
+      $('.nav_admin').toggleClass('open_admin_nav');
+  });
+
   $('.modal').modal();
 
   //Tooltip for group / channel users
   $('.tooltipped').tooltip({delay: 50});
-
 
     // Initializes and creates emoji set from sprite sheet
     window.emojiPicker = new EmojiPicker({

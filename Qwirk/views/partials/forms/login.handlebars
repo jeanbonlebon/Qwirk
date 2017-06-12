@@ -1,24 +1,70 @@
 <div class="bg_home">
-  <div class="container-fluid">
+  <div class="logger_wrap">
 
-    <form id="local-sign-in" class="collapse main_form" action="/auth/login" method="post">
-      <div>
-        <p></p>
-        <label>Username:</label>
-        <input type="text" name="username" />
-      </div>
-      <div>
-        <label>Password:</label>
-        <input type="password" name="password" />
-      </div>
+
+    <div class="container-fluid">
       <div class="row">
-        <div class="col s6">
-          <input type="submit" class="btn btn-primary btn-sm" value="Log In" />
-        </div>
-        <div class="col s6">
-          <a href="/auth/signin" class="btn btn-default btn-md" role="button">Create a account</a>
+        <div class="col s12 nav_pils">
+          <ul class="tabs">
+            <li class="tab col s3"><a href="#local-sign-in">Sign In</a></li>
+            <li class="tab col s3"><a href="#local-reg">Sign Up</a></li>
+          </ul>
         </div>
       </div>
-    </form>
+        <!-- //LOGIN -->
+        <div class="row">
+        <form id="local-sign-in" class="collapse main_form col s12" action="/auth/login" method="post">
+          <div>
+            <p></p>
+            <label>Username:</label>
+            <input type="text" name="username" required/>
+          </div>
+          <div>
+            <label>Password:</label>
+            <input type="password" name="password" required/>
+          </div>
+          <div class="row">
+            <div class="col s12">
+              <input type="submit" class="btn btn-primary btn-sm" value="Log In" />
+            </div>
+          </div>
+        </form>
+        </div>
+        <!-- //REGISTER -->
+        <div class="row">
+        <form id="local-reg" class="collapse main_form" action="/auth/local-reg" method="post">
+        <div class="col s6">
+          <div>
+              <p></p>
+              <label>New Username:</label>
+              <input type="text" name="username" required/>
+          </div>
+          <div>
+              <label>New Password:</label>
+              <input type="password" name="password" required/>
+          </div>
+        </div>
+        <div class="col s6" style="text-align: center;">
+          <label class="avatar">Your Avatar:</label>
+          <img id="output"/>
+          <input type="file" id="selectedFile" accept="image/*" style="display: none;" onchange="loadFile(event)"/>
+          <input type="button" class="btn avatar_btn" value="Browse..."
+                 onclick="document.getElementById('selectedFile').click();" />
+          <script>
+            var loadFile = function(event) {
+              var output = document.getElementById('output');
+              output.src = URL.createObjectURL(event.target.files[0]);
+            };
+          </script>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <input type="submit" class="btn btn-primary btn-sm" value="Register"/>
+          </div>
+          </div>
+        </form>
+      </div>
+
+
   </div>
 </div>
